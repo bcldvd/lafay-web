@@ -12,15 +12,42 @@ import { WorkoutsService } from '../workouts/workouts.service';
 export class HomeComponent implements OnInit {
   version = version;
 
+  menu = [
+    [
+      {
+        name: 'Accueil',
+        icon: 'home',
+        path: '/',
+      },
+      {
+        name: 'Mes dernieres séances',
+        icon: 'update',
+        path: '/last-sessions',
+      },
+      {
+        name: 'Mes statistiques',
+        icon: 'assessment',
+      },
+      {
+        name: 'Ma progression',
+        icon: 'military_tech',
+      },
+    ],
+    [
+      {
+        name: 'Communauté',
+        icon: 'chat',
+      },
+    ],
+  ];
+
   constructor(
     public auth: AuthService,
     private router: Router,
     private workoutsService: WorkoutsService
   ) {}
 
-  ngOnInit(): void {
-    // this.workoutsService.getWorkouts().subscribe(console.log);
-  }
+  ngOnInit(): void {}
 
   async logout() {
     await this.auth.logout();

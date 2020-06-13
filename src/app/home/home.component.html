@@ -4,45 +4,36 @@
             <span class="version-number">v{{version}}</span>
             <img src="/assets/main-logo.png" alt="Main logo">
         </div>
+
         <mat-nav-list>
-            <a mat-list-item [routerLink]="''" routerLinkActive="active">
-                <mat-icon mat-list-icon>home</mat-icon>
-                Accueil
-            </a>
-            <a mat-list-item href="#" disabled>
-                <mat-icon mat-list-icon>update</mat-icon>
-                Mes dernieres séances
-            </a>
-            <a mat-list-item href="#" disabled>
-                <mat-icon mat-list-icon>assessment</mat-icon>
-                Statistiques
-            </a>
-            <a mat-list-item href="#" disabled>
-                <mat-icon mat-list-icon>military_tech</mat-icon>
-                Progression
-            </a>
-            <mat-divider></mat-divider>
-            <a mat-list-item href="#" disabled>
-                <mat-icon mat-list-icon>chat</mat-icon>
-                Communauté
-            </a>
+            <ng-container *ngFor="let items of menu; let last = last">
+                <a mat-list-item *ngFor="let item of items" [routerLink]="item.path" [disabled]="!item.path"
+                    (click)="drawer.toggle()" routerLinkActive="list-item-active"
+                    [routerLinkActiveOptions]="{exact: true}">
+                    <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+                    {{item.name}}
+                </a>
+                <mat-divider *ngIf="!last"></mat-divider>
+            </ng-container>
         </mat-nav-list>
+
         <div class="logout">
             <button mat-flat-button color="warn" (click)="logout()">Se déconnecter</button>
         </div>
     </mat-sidenav>
+
     <mat-sidenav-content>
         <mat-toolbar color="primary">
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Méthode Lafay</span>
+            <span class="fill-remaining-space"></span>
+            <ng-container *ngIf="(auth.user$ | async) as user">
+                <img [src]="user.photoURL" alt="User image" class="user-image">
+            </ng-container>
         </mat-toolbar>
 
-        <!-- Add Content Here -->
-        <ng-container *ngIf="(auth.user$ | async) as user">
-            Welcome back {{user.displayName}} !
-        </ng-container>
         <div class="app-content">
             <router-outlet></router-outlet>
         </div>
