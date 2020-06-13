@@ -30,7 +30,7 @@
             <span>Méthode Lafay</span>
             <span class="fill-remaining-space"></span>
             <ng-container *ngIf="(auth.user$ | async) as user">
-                <img [src]="user.photoURL" alt="User image" class="user-image">
+                <img *ngIf="!user.isAnonymous" [src]="user.photoURL" alt="User image" class="user-image">
             </ng-container>
         </mat-toolbar>
 

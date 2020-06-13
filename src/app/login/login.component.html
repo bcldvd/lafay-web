@@ -1,1 +1,11 @@
-<button (click)="login()">Login with Google</button>
+<h1>La Méthode lafay</h1>
+
+<img src="/assets/main-logo.png" alt="Main logo">
+
+<div class="login-buttons">
+    <button mat-raised-button (click)="login()">
+        <mat-icon svgIcon="google-logo"></mat-icon>
+        S'identifier avec Google
+    </button>
+    <button mat-raised-button color="accent" (click)="anonymousLogin()">Je veux juste essayer</button>
+</div>

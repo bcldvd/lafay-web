@@ -19,6 +19,10 @@ export class AuthService {
     return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
+  async anonymousLogin() {
+    return this.afAuth.signInAnonymously();
+  }
+
   async login() {
     return this.googleLogin();
   }

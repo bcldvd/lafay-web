@@ -1,0 +1,20 @@
+:host {
+    display: grid;
+    grid-template-rows: 2fr 4fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    height: 100vh;
+
+    h1 {
+        font-size: 3em;
+    }
+
+    img {
+        box-shadow: 0 4px 5px -5px #ccc;
+    }
+
+    .login-buttons {
+        display: grid;
+        grid-gap: 10px;
+    }
+}
