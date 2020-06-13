@@ -1,0 +1,7 @@
+<ng-container *ngIf="(auth.user$ | async) as user">
+    Welcome back {{user.displayName}} !
+</ng-container>
+
+<br>
+
+<button (click)="logout()">Logout</button>

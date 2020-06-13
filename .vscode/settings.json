@@ -1,0 +1,11 @@
+{
+  "debug.node.autoAttach": "on",
+  "editor.formatOnSave": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#5e6a35",
+    "activityBar.foreground": "#ffffff",
+    "activityBar.inactiveForeground": "#7b923f",
+    "activityBarBadge.background": "#96b25e",
+    "activityBarBadge.foreground": "#e7e7e7"
+  }
+}
