@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/firestore';
+import { version } from '../../../package.json';
 import { WorkoutsService } from '../workouts/workouts.service';
 
 @Component({
@@ -13,6 +10,8 @@ import { WorkoutsService } from '../workouts/workouts.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  version = version;
+
   constructor(
     public auth: AuthService,
     private router: Router,

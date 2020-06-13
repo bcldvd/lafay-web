@@ -12,6 +12,35 @@ mat-sidenav {
 
     mat-nav-list {
         flex: 1;
+
+        mat-icon {
+            margin-right: 16px;
+        }
+    }
+}
+
+.mat-list-item-disabled {
+    color: #e0e0e0 !important;
+    background-color: inherit;
+}
+
+.nav-header {
+    text-align: center;
+    padding-top: 20px;
+    background: #fafafa;
+    position: relative;
+
+    .version-number {
+        position: absolute;
+        text-align: center;
+        width: 280px;
+        bottom: 0;
+        color: white;
+        font-size: 0.8em;
+    }
+
+    img {
+        margin-bottom: -5px;
     }
 }
 

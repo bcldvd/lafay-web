@@ -1,13 +1,34 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'navigation'" mode="over">
-        <mat-toolbar>Menu</mat-toolbar>
+        <div class="nav-header">
+            <span class="version-number">v{{version}}</span>
+            <img src="/assets/main-logo.png" alt="Main logo">
+        </div>
         <mat-nav-list>
-            <a mat-list-item href="#">Link 1</a>
-            <a mat-list-item href="#">Link 2</a>
-            <a mat-list-item href="#">Link 3</a>
+            <a mat-list-item [routerLink]="''" routerLinkActive="active">
+                <mat-icon mat-list-icon>home</mat-icon>
+                Accueil
+            </a>
+            <a mat-list-item href="#" disabled>
+                <mat-icon mat-list-icon>update</mat-icon>
+                Mes dernieres séances
+            </a>
+            <a mat-list-item href="#" disabled>
+                <mat-icon mat-list-icon>assessment</mat-icon>
+                Statistiques
+            </a>
+            <a mat-list-item href="#" disabled>
+                <mat-icon mat-list-icon>military_tech</mat-icon>
+                Progression
+            </a>
+            <mat-divider></mat-divider>
+            <a mat-list-item href="#" disabled>
+                <mat-icon mat-list-icon>chat</mat-icon>
+                Communauté
+            </a>
         </mat-nav-list>
         <div class="logout">
-            <button mat-flat-button color="warn" (click)="logout()">Logout</button>
+            <button mat-flat-button color="warn" (click)="logout()">Se déconnecter</button>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -15,7 +36,7 @@
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span>lafay-reloaded</span>
+            <span>Méthode Lafay</span>
         </mat-toolbar>
 
         <!-- Add Content Here -->
