@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
+import { WorkoutsService } from '../workouts/workouts.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +13,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    private workoutsService: WorkoutsService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.workoutsService.getWorkouts().subscribe(console.log);
+  }
 
   async logout() {
     await this.auth.logout();
     this.router.navigate(['login']);
+  }
+
+  addWorkout() {
+    const workout = {
+      level: 4,
+    };
+    this.workoutsService.addWorkout(workout);
   }
 }

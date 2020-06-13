@@ -1,0 +1,21 @@
+mat-sidenav-container {
+    height: 100vh;
+}
+
+mat-sidenav {
+    width: 300px;
+}
+
+::ng-deep .mat-drawer-inner-container {
+    display: flex !important;
+    flex-direction: column;
+
+    mat-nav-list {
+        flex: 1;
+    }
+}
+
+.logout button {
+    width: calc(100% - 10px);
+    margin: 5px;
+}
