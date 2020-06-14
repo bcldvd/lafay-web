@@ -1,0 +1,13 @@
+<ul>
+    <li *ngFor="let exercise of session">
+        <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
+        <div class="exercise-description">
+            <span class="exercise-name mat-title">{{exercise.name}}</span>
+            <span *ngIf="exercise.reps">x{{exercise.reps}}</span>
+            <span *ngIf="!exercise.reps">{{exercise.time}} sec</span>
+        </div>
+        <button mat-button (click)="openDialog(exercise)">
+            <mat-icon>info</mat-icon>
+        </button>
+    </li>
+</ul>
