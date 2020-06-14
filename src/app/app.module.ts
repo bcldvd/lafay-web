@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -13,11 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { PwaPromptComponent } from './pwa-prompt/pwa-prompt.component';
+import { PwaService } from './pwa.service';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
 
 registerLocaleData(localeFr, 'fr-FR');
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PwaPromptComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,11 +30,21 @@ registerLocaleData(localeFr, 'fr-FR');
     AngularFireAuthModule,
     AngularFirestoreModule,
     HttpClientModule,
+    MatBottomSheetModule,
+    MatButtonModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (pwaService: PwaService) => () => pwaService.initPwaPrompt(),
+      deps: [PwaService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

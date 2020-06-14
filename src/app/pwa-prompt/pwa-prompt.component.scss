@@ -1,0 +1,61 @@
+$font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$margin: 16px;
+
+$blue-color-modern-light: rgba(0, 122, 255, 1);
+
+$border-color-modern-light: rgba(60, 60, 67, 0.29);
+
+h3 {
+    font-family: $font-family;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-color-modern-light;
+
+    padding-left: $margin;
+    margin-left: -$margin;
+    padding-right: $margin;
+    margin-right: -$margin;
+
+    a {
+        text-decoration: none;
+        color: $blue-color-modern-light;
+    }
+}
+
+.pwa-info {
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(60, 60, 67, 0.29);
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding-left: 16px;
+
+    li {
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            margin-top: 16px;
+        }
+    }
+}
+
+.share-icon,
+.home-screen-icon {
+    height: 30px;
+    margin-right: 32px;
+    width: 25px;
+}
+
+.share-icon {
+    color: $blue-color-modern-light;
+    fill: $blue-color-modern-light;
+}
+
+.android-prompt {
+    display: flex;
+    justify-content: space-between;
+}
