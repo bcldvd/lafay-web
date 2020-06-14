@@ -12,6 +12,7 @@ const ownerIdPropName = 'ownerId';
 })
 export class ProfileService {
   docId: string;
+  guestUser: UserProfile;
 
   constructor(
     private authService: AuthService,
@@ -27,7 +28,11 @@ export class ProfileService {
             ref.where(ownerIdPropName, '==', user.uid)
           )
           .valueChanges({ idField: 'docId' })
-          .pipe(map((profiles) => profiles[0]));
+          .pipe(
+            map((profiles) => {
+              return this.guestUser || profiles[0];
+            })
+          );
       })
     );
 
@@ -38,7 +43,7 @@ export class ProfileService {
     return profile$;
   }
 
-  createProfile(preferences: UserPreferences) {
+  async createProfile(preferences: UserPreferences) {
     const user = this.authService.user$.value;
     const profile = {
       preferences,
@@ -47,7 +52,11 @@ export class ProfileService {
       lastEdit: Date.now(),
       ownerId: user.uid,
     };
-    return this.afs.collection<UserProfile>(collectionName).add(profile);
+    if (user.isAnonymous) {
+      this.guestUser = profile;
+    } else {
+      return this.afs.collection<UserProfile>(collectionName).add(profile);
+    }
   }
 
   updatePreferences(preferences: UserPreferences) {
