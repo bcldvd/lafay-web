@@ -18,12 +18,8 @@ export class SessionPlanComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   openDialog(exercise) {
-    const dialogRef = this.dialog.open(DialogExerciseInfoComponent, {
+    this.dialog.open(DialogExerciseInfoComponent, {
       data: exercise,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 

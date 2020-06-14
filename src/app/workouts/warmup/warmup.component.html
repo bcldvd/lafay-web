@@ -5,7 +5,7 @@
     votre énergie pour la musculation</p>
 
 <h3>Déroulement de l'échauffement :</h3>
-<app-session-plan [session]="session"></app-session-plan>
+<app-session-plan *ngIf="session" [session]="session"></app-session-plan>
 
 <br>
 

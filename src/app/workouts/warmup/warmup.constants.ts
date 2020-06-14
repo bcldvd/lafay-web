@@ -30,3 +30,31 @@ export const session: Session = [
     rest: TAKE_YOUR_BREATH_REST,
   },
 ];
+
+export const sessionWithJumpingRope: Session = [
+  {
+    name: 'A',
+    reps: PUSHUP_REPS,
+    rest: TAKE_YOUR_BREATH_REST,
+  },
+  {
+    name: 'C.a.S.',
+    time: 60,
+    rest: TAKE_YOUR_BREATH_REST,
+  },
+  {
+    name: 'A',
+    reps: PUSHUP_REPS,
+    rest: TAKE_YOUR_BREATH_REST,
+  },
+  {
+    name: 'C.a.S.',
+    time: 120,
+    rest: TAKE_YOUR_BREATH_REST,
+  },
+  {
+    name: 'A',
+    reps: PUSHUP_REPS,
+    rest: TAKE_YOUR_BREATH_REST,
+  },
+];
