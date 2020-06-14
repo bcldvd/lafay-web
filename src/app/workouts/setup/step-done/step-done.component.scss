@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+::ng-deep .mat-list-text {
+    flex-direction: row !important;
+    align-items: center;
+
+    img {
+        margin-right: 16px !important;
+    }
+}

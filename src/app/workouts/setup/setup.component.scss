@@ -1,0 +1,16 @@
+:host {
+    text-align: center;
+    display: grid;
+    height: 100%;
+    grid-template-rows: 1fr 6fr 1fr;
+
+    h1 {
+        align-self: center;
+    }
+
+    .steps {
+        display: flex;
+        align-self: center;
+        justify-content: space-between;
+    }
+}

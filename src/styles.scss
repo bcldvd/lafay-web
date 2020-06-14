@@ -13,3 +13,10 @@ body {
 .fill-remaining-space {
     flex: 1 1 auto;
 }
+
+/**  Globals helper classes */
+
+.cta-button {
+    display: flex;
+    justify-content: center;
+}

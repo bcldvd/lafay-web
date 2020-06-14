@@ -1,0 +1,22 @@
+:host {
+    text-align: justify;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    .info {
+        flex: 1;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    ul {
+        text-align: initial;
+    }
+
+    .cta-button {
+        margin-bottom: 32px;
+    }
+}

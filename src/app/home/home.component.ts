@@ -38,6 +38,11 @@ export class HomeComponent implements OnInit {
         name: 'Communauté',
         icon: 'chat',
       },
+      {
+        name: 'A propos',
+        icon: 'info',
+        path: '/about',
+      },
     ],
   ];
 

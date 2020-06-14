@@ -1,0 +1,10 @@
+<h1>Setup {{currentStep + 1}}/{{nbSteps}} : {{stepsMeta[currentStep].name}}</h1>
+
+<app-step2 (changed)="step2Change($event)" *ngIf="currentStep == steps.EQUIPMENT"></app-step2>
+<app-step-done *ngIf="currentStep == steps.DONE" [preferences]="preferences"></app-step-done>
+
+<div class="steps">
+    <button mat-button color="primary" (click)="previousStep()">Précedent</button>
+    <button mat-raised-button color="primary" (click)="nextStep()" *ngIf="currentStep != steps.DONE"
+        [disabled]="!stepsMeta[currentStep].validity">Suivant</button>
+</div>

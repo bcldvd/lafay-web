@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    grid-template-rows: 3fr;
+
+    p {
+        align-self: center;
+    }
+
+    .choice {
+        justify-self: center;
+        align-self: center;
+    }
+}

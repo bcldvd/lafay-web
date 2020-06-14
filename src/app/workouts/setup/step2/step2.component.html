@@ -1,0 +1,10 @@
+<p>
+    <img src="/assets/skipping-rope-big.png" alt="Image d'une corde à sauter">
+    <br>
+    Avez vous une corde à sauter ?
+</p>
+
+<mat-button-toggle-group name="jumpingRope" aria-label="Corde à sauter" class="choice" (change)="onChange($event)">
+    <mat-button-toggle value="false">Non 😢</mat-button-toggle>
+    <mat-button-toggle value="true">Oui 👌🏼</mat-button-toggle>
+</mat-button-toggle-group>

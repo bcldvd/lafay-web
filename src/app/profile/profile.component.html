@@ -1,0 +1,19 @@
+<div class="avatar">
+    <ng-container *ngIf="(auth.user$ | async) as user">
+        <div class="user-info">
+            <h3>{{user.displayName}} - {{user.email}}</h3>
+            <ng-container *ngIf="(profile$ | async) as profile">
+                <h4>Membre depuis le {{profile.memberSince | date:'longDate'}}</h4>
+            </ng-container>
+            <mat-divider></mat-divider>
+            <br>
+        </div>
+    </ng-container>
+</div>
+
+<form [formGroup]="formGroup" ngNativeValidate>
+    <mat-slide-toggle formControlName="jumpingRope" labelPosition="before">
+        <img src="/assets/skipping-rope.png" alt="Image de corde à sauter">
+        Corde à sauter
+    </mat-slide-toggle>
+</form>
