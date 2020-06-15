@@ -1,14 +1,19 @@
-<h1 class="center-text">Échauffement</h1>
+<ng-container *ngIf="currentStep === STEPS.SESSION_PLAN">
+    <h1 class="center-text">Échauffement</h1>
+    <p class="warmup-warning">L'objectif est d'échauffer votre corps et non de réaliser des performances (ou de vous
+        épuiser). Vous devez garder
+        votre énergie pour la musculation</p>
 
-<p class="warmup-warning">L'objectif est d'échauffer votre corps et non de réaliser des performances (ou de vous
-    épuiser). Vous devez garder
-    votre énergie pour la musculation</p>
+    <h3>Déroulement de l'échauffement :</h3>
+    <app-session-plan *ngIf="session" [session]="session"></app-session-plan>
 
-<h3>Déroulement de l'échauffement :</h3>
-<app-session-plan *ngIf="session" [session]="session"></app-session-plan>
+    <br>
 
-<br>
+    <div class="cta-button">
+        <button mat-raised-button color="primary" (click)="nextStep()">Je suis pret !</button>
+    </div>
+</ng-container>
 
-<div class="cta-button">
-    <button mat-raised-button color="primary">Je suis pret !</button>
-</div>
+<app-session *ngIf="currentStep === STEPS.SESSION" [session]="session"></app-session>
+
+<ng-container *ngIf="currentStep === STEPS.DONE"></ng-container>

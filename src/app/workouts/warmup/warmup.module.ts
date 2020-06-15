@@ -10,6 +10,7 @@ import {
   DialogExerciseInfoComponent,
 } from '../session-plan/session-plan.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SessionModule } from '../session/session.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    SessionModule,
   ],
 })
 export class WarmupModule {}

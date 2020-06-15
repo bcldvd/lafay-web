@@ -1,0 +1,50 @@
+<ng-container *ngIf="(currentExercise$ | async) as exercise">
+
+    <div class="exercise-header">
+        <h2>Exercice : {{exercise.name}}</h2>
+        <div class="exercise-meta">
+            <span>
+                Set
+                <span *ngFor="let set of sets" class="set"
+                    [ngClass]="{'current-set': currentSet === set}">{{set}}</span>
+            </span>
+            <span>{{currentExerciseNb}}/{{exercisesNb}}</span>
+        </div>
+    </div>
+
+    <div class="exercise-visual">
+        <img [src]="exercise.image" alt="Image de l'exercise">
+    </div>
+
+    <div class="exercise-cues">
+        <div class="reps" *ngIf="exercise.reps">
+            <span class="reps-nb mat-display-3">{{exercise.reps}}</span>
+            <span class="reps-legend">Répétitions</span>
+        </div>
+        <div class="time" *ngIf="!exercise.reps">
+            <span>{{exercise.time}}</span>
+            <span>Secondes</span>
+        </div>
+
+        <div class="exercise-actions">
+            <button mat-button color="primary" (click)="exerciseDone()">Info</button>
+            <button mat-raised-button color="primary" (click)="exerciseDone()">C'est fait !</button>
+        </div>
+    </div>
+
+    <div class="next-up">
+        <div class="rest">
+            <span class="legend">Récupération</span>
+            <span>{{exercise.rest}} secondes</span>
+        </div>
+        <div class="next-exercise" *ngIf="session[currentExerciseNb]">
+            <span class="legend">À suivre</span>
+            <span>{{session[currentExerciseNb].name}}</span>
+            <span class="next-amount" *ngIf="!session[currentExerciseNb].reps">{{session[currentExerciseNb].time}}
+                secondes</span>
+            <span class="next-amount"
+                *ngIf="session[currentExerciseNb].reps">x{{session[currentExerciseNb].reps}}</span>
+        </div>
+    </div>
+
+</ng-container>
