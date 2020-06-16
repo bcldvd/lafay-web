@@ -8,6 +8,8 @@ export interface Exercise {
   time?: number;
   rest: number;
   sets: number;
+  effective?: number[];
+  skipEffective?: boolean;
 }
 
 export interface WorkoutDto {

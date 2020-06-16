@@ -18,7 +18,7 @@ export class WarmupComponent implements OnInit {
   constructor(private profileService: ProfileService) {}
 
   ngOnInit(): void {
-    /* this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
+    this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
     this.profileService
       .getProfile()
       .pipe(take(1))
@@ -27,9 +27,9 @@ export class WarmupComponent implements OnInit {
           (this.session = profile.preferences.jumpingRope
             ? sessionWithJumpingRope
             : session)
-      ); */
-    this.session = session;
-    this.currentStep = WORKOUTS_STEPS.SESSION;
+      );
+    /* this.session = session;
+    this.currentStep = WORKOUTS_STEPS.SESSION; */
   }
 
   previousStep() {

@@ -1,0 +1,8 @@
+$height: 80px;
+
+:host {
+  height: $height;
+  font-size: $height;
+  text-align: center;
+  display: block;
+}

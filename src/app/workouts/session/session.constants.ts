@@ -1,4 +1,4 @@
-export enum STATUS {
+export enum SESSION_STATUSES {
   EXERCISE,
   REST,
   DONE,
