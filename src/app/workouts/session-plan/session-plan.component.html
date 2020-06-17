@@ -1,13 +1,20 @@
 <ul>
-    <li *ngFor="let exercise of session">
-        <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
-        <div class="exercise-description">
-            <span class="exercise-name mat-title">{{exercise.name}}</span>
-            <span *ngIf="exercise.reps">x{{exercise.reps}}</span>
-            <span *ngIf="!exercise.reps">{{exercise.time}} sec</span>
-        </div>
-        <button mat-button (click)="openDialog(exercise)">
-            <mat-icon>info</mat-icon>
-        </button>
-    </li>
+    <ng-container *ngFor="let exercise of session">
+        <li>
+            <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
+            <div class="exercise-description">
+                <span class="exercise-name mat-title">{{exercise.name}}</span>
+                <span *ngIf="exercise.reps">x{{exercise.reps}}</span>
+                <span *ngIf="exercise.time">{{exercise.time}} sec</span>
+                <span *ngIf="!exercise.reps && !exercise.time">∞ </span>
+            </div>
+            <button mat-button color="accent" (click)="openDialog(exercise)">
+                <mat-icon>info</mat-icon>
+            </button>
+        </li>
+        <li *ngIf="exercise.rest" class="exercise-rest">
+            <span>Repos</span>
+            <span>{{exercise.rest * 1000 | date:'m:ss'}}</span>
+        </li>
+    </ng-container>
 </ul>

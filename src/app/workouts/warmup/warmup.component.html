@@ -14,6 +14,6 @@
     </div>
 </ng-container>
 
-<app-session *ngIf="currentStep === STEPS.SESSION" [session]="session"></app-session>
+<app-session *ngIf="currentStep === STEPS.SESSION" [session]="session" (done)="onSessionDone()"></app-session>
 
 <ng-container *ngIf="currentStep === STEPS.DONE"></ng-container>

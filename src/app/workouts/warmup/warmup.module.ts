@@ -11,13 +11,10 @@ import {
 } from '../session-plan/session-plan.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SessionModule } from '../session/session.module';
+import { SessionPlanModule } from '../session-plan/session-plan.module';
 
 @NgModule({
-  declarations: [
-    WarmupComponent,
-    SessionPlanComponent,
-    DialogExerciseInfoComponent,
-  ],
+  declarations: [WarmupComponent],
   imports: [
     CommonModule,
     WarmupRoutingModule,
@@ -25,6 +22,7 @@ import { SessionModule } from '../session/session.module';
     MatButtonModule,
     MatDialogModule,
     SessionModule,
+    SessionPlanModule,
   ],
 })
 export class WarmupModule {}

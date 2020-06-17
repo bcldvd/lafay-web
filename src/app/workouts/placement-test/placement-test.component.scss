@@ -1,0 +1,16 @@
+.session-plan {
+    h1 {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    display: grid;
+    grid-template-rows: 1fr 6fr 1fr;
+    height: 100%;
+
+    .cta-button {
+        align-self: center;
+    }
+}

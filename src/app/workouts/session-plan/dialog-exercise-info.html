@@ -1,5 +1,6 @@
 <mat-dialog-content>
     <img [src]="data.imageFull" style="width: 100%">
+    <p class="page-number mat-caption center-text no-margin" *ngIf="data.page">📗→ Page {{data.page}}</p>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

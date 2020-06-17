@@ -11,13 +11,16 @@
                 </span>
                 <span>{{currentExerciseNb + 1}}/{{exercisesNb}}</span>
             </div>
+            <mat-progress-bar [value]="sessionProgress">
+            </mat-progress-bar>
         </div>
 
         <div class="exercise-visual">
             <img [src]="exercise.image" alt="Image de l'exercise" class="exercise-image"
                 *ngIf="currentStatus === STATUSES.EXERCISE">
             <img src="/assets/stopwatch.png" alt="Image d'un timer" *ngIf="currentStatus === STATUSES.REST">
-            <img src="/assets/water.png" alt="Image d'une gourde d'eau" *ngIf="currentStatus === STATUSES.REST">
+            <img src="/assets/water.png" alt="Image d'une gourde d'eau"
+                *ngIf="currentStatus === STATUSES.REST && exercise.rest > 45">
         </div>
 
         <div class="exercise-cues" *ngIf="currentStatus === STATUSES.EXERCISE">
@@ -25,23 +28,42 @@
                 <span class="reps-nb mat-display-3">{{exercise.reps}}</span>
                 <span class="reps-legend">Répétitions</span>
             </div>
-            <div class="time" *ngIf="!exercise.reps">
+            <div class="time" *ngIf="exercise.time">
                 <app-countdown [time]="exercise.time" (done)="exerciseDone()"></app-countdown>
             </div>
 
+            <div class="as-much-as-possible" *ngIf="!exercise.reps && !exercise.time">
+                <span class="mat-display-1">Autant que possible !!</span>
+            </div>
+
             <div class="exercise-actions" *ngIf="currentStatus === STATUSES.EXERCISE">
-                <button mat-button color="primary" (click)="openDialog(exercise)">Info</button>
+                <button mat-button color="accent" (click)="openDialog(exercise)">
+                    <mat-icon>info</mat-icon>
+                </button>
                 <button mat-raised-button color="primary" (click)="exerciseDone()">C'est fait !</button>
             </div>
         </div>
 
         <div class="exercise-rest" *ngIf="currentStatus === STATUSES.REST">
-            <app-countdown [time]="exercise.rest" (done)="restDone()"></app-countdown>
+            <app-countdown #cd [time]="exercise.rest" (done)="restTimerDone()" *ngIf="!cooldownDone"></app-countdown>
 
-            <div class="rest-actions" *ngIf="exercise.skipEffective">
-                <button mat-raised-button color="accent" (click)="restDone()">Passer la récupération</button>
+            <form [formGroup]="formGroup" *ngIf="!exercise.skipEffective">
+                <mat-form-field>
+                    <mat-label>Répétitions</mat-label>
+                    <input matInput maxlength="3" min="1" required type="number" pattern="[0-9]*"
+                        formControlName="reps">
+                </mat-form-field>
+            </form>
+
+            <div class="rest-actions">
+                <button mat-button color="primary" (click)="restDone()" *ngIf="cooldownDone"
+                    [disabled]="formGroup.invalid" class="validate-rep">
+                    <mat-icon>checkbox</mat-icon>
+                </button>
+                <button mat-raised-button color="accent" (click)="restDone()" *ngIf="!cooldownDone"
+                    [disabled]="formGroup.invalid">Passer la
+                    récupération</button>
             </div>
-            <!-- TODO: Add input for effective reps -->
         </div>
 
         <div class="next-up">
@@ -71,6 +93,12 @@
     <div class="session-done">
         <img src="/assets/reward.png" alt="Image d'une médaille">
         <h2 class="mat-display-3">Bravo !</h2>
+
+        <ng-container *ngFor="let exercise of session">
+            {{exercise.name}} - {{exercise.effective | json}}
+            <br>
+        </ng-container>
+
         (la suite est en cours de développement 😅)
     </div>
 </ng-template>

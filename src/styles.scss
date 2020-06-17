@@ -10,8 +10,14 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.fill-remaining-space {
-    flex: 1 1 auto;
+.full-width-dialog {
+    .mat-dialog-content {
+        padding: 0 5px;
+    }
+
+    .mat-dialog-actions {
+        padding: 0;
+    }
 }
 
 /**  Globals helper classes */
@@ -23,4 +29,12 @@ body {
 
 .center-text {
     text-align: center;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.fill-remaining-space {
+    flex: 1 1 auto;
 }

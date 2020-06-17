@@ -16,8 +16,7 @@ h2 {
     display: flex;
     justify-content: space-between;
     text-transform: uppercase;
-    border-bottom: 1px solid #ccc;
-    margin: 8px -5px;
+    margin: 8px -5px 0;
     padding: 8px 8px 3px;
     color: $material-grey;
     font-weight: bold;
@@ -33,6 +32,12 @@ h2 {
     .current-set {
         background: $primary-color;
         color: white;
+    }
+}
+
+.exercise-header {
+    mat-progress-bar {
+        height: 2px;
     }
 }
 
@@ -57,7 +62,8 @@ h2 {
     justify-content: space-between;
 
     .reps,
-    .time {
+    .time,
+    .as-much-as-possible {
         display: grid;
         justify-items: center;
 
@@ -77,9 +83,38 @@ h2 {
 }
 
 .exercise-rest {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    form {
+        text-align: center;
+
+        mat-form-field {
+            width: 60%;
+            font-size: 2em;
+
+            input {
+                text-align: center;
+            }
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    }
     .rest-actions {
         display: flex;
         justify-content: center;
+
+        .validate-rep {
+            transform: scale(2);
+        }
     }
 }
 

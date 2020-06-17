@@ -10,6 +10,7 @@ export interface Exercise {
   sets: number;
   effective?: number[];
   skipEffective?: boolean;
+  page?: number;
 }
 
 export interface WorkoutDto {

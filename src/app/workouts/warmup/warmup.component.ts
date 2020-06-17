@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { session, sessionWithJumpingRope } from './warmup.constants';
 import { ProfileService } from 'src/app/profile/profile.service';
-import { take } from 'rxjs/operators';
+import { take, filter } from 'rxjs/operators';
 import { Session } from '../workouts.interfaces';
 import { WORKOUTS_STEPS } from '../workouts.constants';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-warmup',
@@ -14,8 +15,13 @@ export class WarmupComponent implements OnInit {
   session: Session;
   STEPS = WORKOUTS_STEPS;
   currentStep: WORKOUTS_STEPS;
+  level: string;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(
+    private profileService: ProfileService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
@@ -28,8 +34,11 @@ export class WarmupComponent implements OnInit {
             ? sessionWithJumpingRope
             : session)
       );
-    /* this.session = session;
-    this.currentStep = WORKOUTS_STEPS.SESSION; */
+    this.route.queryParams
+      .pipe(filter((params) => params.level))
+      .subscribe((params) => {
+        this.level = params.level;
+      });
   }
 
   previousStep() {
@@ -38,5 +47,13 @@ export class WarmupComponent implements OnInit {
 
   nextStep() {
     this.currentStep++;
+  }
+
+  onSessionDone() {
+    if (this.level) {
+      this.router.navigate([`../../${this.level}`], {
+        relativeTo: this.route,
+      });
+    }
   }
 }

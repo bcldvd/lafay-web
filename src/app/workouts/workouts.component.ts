@@ -29,6 +29,9 @@ export class WorkoutsComponent implements OnInit {
 
   start() {
     const navigateTo = this.profile ? 'warmup' : 'setup';
-    this.router.navigate([`${navigateTo}`], { relativeTo: this.route });
+    this.router.navigate([navigateTo], {
+      relativeTo: this.route,
+      queryParams: { level: 'placement-test' },
+    });
   }
 }

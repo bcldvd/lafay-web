@@ -5,7 +5,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Session, Exercise } from '../workouts.interfaces';
-import { EXERCISES_IMAGE_PATH } from '../../../app/app.constants';
+import {
+  EXERCISES_IMAGE_PATH,
+  EXERCISES_META,
+} from '../../../app/app.constants';
 
 @Component({
   selector: 'app-session-plan',
@@ -20,6 +23,8 @@ export class SessionPlanComponent implements OnInit {
   openDialog(exercise) {
     this.dialog.open(DialogExerciseInfoComponent, {
       data: exercise,
+      maxWidth: '98vw',
+      panelClass: 'full-width-dialog',
     });
   }
 
@@ -27,6 +32,7 @@ export class SessionPlanComponent implements OnInit {
     this.session = this.session.map((exercise) => {
       exercise.image = `${EXERCISES_IMAGE_PATH}/${exercise.name}.png`;
       exercise.imageFull = `${EXERCISES_IMAGE_PATH}/${exercise.name}-full.png`;
+      exercise.page = EXERCISES_META[exercise.name].page;
       return exercise;
     });
   }

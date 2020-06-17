@@ -25,4 +25,18 @@ ul {
             margin-bottom: 0;
         }
     }
+
+    .exercise-rest {
+        font-size: 0.8em;
+        color: #9e9e9e;
+
+        span:first-child {
+            justify-self: center;
+            text-transform: uppercase;
+
+            &:before {
+                content: "↳ ";
+            }
+        }
+    }
 }

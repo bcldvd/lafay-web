@@ -1,1 +1,24 @@
-<p>placement-test works!</p>
+<div class="session-plan" *ngIf="currentStep === STEPS.SESSION_PLAN">
+    <h1>
+        <img src="/assets/clipboard.png" alt="Image d'un calepin">
+        Test de placement
+    </h1>
+
+    <div>
+        <p>Il s'agit pour vous de connaître vos performances réalisées à pleine amplitude sur les exercices suivants :
+        </p>
+
+        <app-session-plan [session]="session"></app-session-plan>
+
+        <p>Avant de commencer, lisez bien les détails de chaque exercices en appuyant sur le bouton <mat-icon
+                color="accent">
+                info</mat-icon> à coté de chaque exercice
+        </p>
+    </div>
+
+    <div class="cta-button">
+        <button mat-raised-button color="primary" (click)="nextStep()">J'ai bien tout lu, c'est parti</button>
+    </div>
+</div>
+
+<app-session *ngIf="currentStep === STEPS.SESSION" [session]="session" (done)="onSessionDone()"></app-session>
