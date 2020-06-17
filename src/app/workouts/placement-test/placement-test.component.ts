@@ -15,8 +15,7 @@ export class PlacementTestComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
-    this.currentStep = WORKOUTS_STEPS.SESSION;
+    this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
   }
 
   previousStep() {

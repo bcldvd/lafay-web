@@ -60,8 +60,11 @@
                     [disabled]="formGroup.invalid" class="validate-rep">
                     <mat-icon>checkbox</mat-icon>
                 </button>
-                <button mat-raised-button color="accent" (click)="restDone()" *ngIf="!cooldownDone"
-                    [disabled]="formGroup.invalid">Passer la
+                <button mat-raised-button color="accent" (click)="restDone()"
+                    *ngIf="!cooldownDone && !exercise.skipEffective" [disabled]="formGroup.invalid">Passer la
+                    récupération</button>
+                <button mat-raised-button color="accent" (click)="restDone()"
+                    *ngIf="!cooldownDone && exercise.skipEffective">Passer la
                     récupération</button>
             </div>
         </div>

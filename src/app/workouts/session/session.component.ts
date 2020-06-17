@@ -88,9 +88,11 @@ export class SessionComponent implements OnInit {
   }
 
   restDone() {
-    this.session[this.currentExerciseNb].effective[
-      this.currentSet - 1
-    ] = this.formGroup.get('reps').value;
+    if (!this.session[this.currentExerciseNb].skipEffective) {
+      this.session[this.currentExerciseNb].effective[
+        this.currentSet - 1
+      ] = this.formGroup.get('reps').value;
+    }
     if (this.session[this.currentExerciseNb + 1]) {
       this.nextExercise();
     } else if (!this.session[this.currentExerciseNb + 1]) {
@@ -101,7 +103,10 @@ export class SessionComponent implements OnInit {
 
   restTimerDone() {
     this.cooldownDone = true;
-    if (this.formGroup.valid) {
+    if (
+      this.session[this.currentExerciseNb].skipEffective ||
+      (this.formGroup.valid && this.formGroup.get('reps')['_pendingTouched'])
+    ) {
       this.restDone();
     }
   }
