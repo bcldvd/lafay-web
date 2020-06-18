@@ -1,0 +1,11 @@
+<ul>
+    <li *ngFor="let exercise of session">
+        <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
+        <span class="exercise-name mat-title">{{exercise.name}}</span>
+        <div class="exercise-reps">
+            <span *ngFor="let nbRep of exercise.effective">
+                {{nbRep}}
+            </span>
+        </div>
+    </li>
+</ul>

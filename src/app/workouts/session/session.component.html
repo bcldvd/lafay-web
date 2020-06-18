@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentStatus !== STATUSES.DONE; else done">
+<div class="working-out" *ngIf="currentStatus !== STATUSES.DONE; else done">
     <ng-container *ngIf="(currentExercise$ | async) as exercise">
 
         <div class="exercise-header">
@@ -90,18 +90,14 @@
         </div>
 
     </ng-container>
-</ng-container>
+</div>
 
 <ng-template #done>
     <div class="session-done">
-        <img src="/assets/reward.png" alt="Image d'une médaille">
-        <h2 class="mat-display-3">Bravo !</h2>
+        <h1>Résumé de la séance</h1>
 
-        <ng-container *ngFor="let exercise of session">
-            {{exercise.name}} - {{exercise.effective | json}}
-            <br>
-        </ng-container>
+        <img src="/assets/reward.png" alt="Image d'une médaille" class="medal">
 
-        (la suite est en cours de développement 😅)
+        <app-session-summary [session]="session"></app-session-summary>
     </div>
 </ng-template>

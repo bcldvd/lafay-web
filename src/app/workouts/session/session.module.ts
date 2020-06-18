@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SessionSummaryModule } from './session-summary/session-summary.module';
 
 const components = [SessionComponent, WorkoutCountdownComponent];
 
@@ -24,6 +25,7 @@ const components = [SessionComponent, WorkoutCountdownComponent];
     ReactiveFormsModule,
     MatInputModule,
     MatProgressBarModule,
+    SessionSummaryModule,
   ],
 })
 export class SessionModule {}

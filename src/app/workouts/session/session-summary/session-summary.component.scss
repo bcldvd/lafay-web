@@ -1,0 +1,26 @@
+ul {
+    width: 80vw;
+    list-style: none;
+    padding: 0;
+
+    li {
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        align-items: center;
+        justify-items: center;
+        margin: 8px 0;
+
+        img {
+            width: 60px;
+            border-radius: 3px;
+        }
+
+        .exercise-name {
+            margin-bottom: 0;
+        }
+
+        .exercise-reps span {
+            margin: 0 5px;
+        }
+    }
+}

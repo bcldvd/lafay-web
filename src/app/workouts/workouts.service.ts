@@ -29,12 +29,17 @@ export class WorkoutsService {
     );
   }
 
-  addWorkout(newWorkout: WorkoutDto) {
+  async addWorkout(newWorkout: WorkoutDto) {
+    const user = this.authService.user$.value;
+    if (user.isAnonymous) {
+      return;
+    }
+
     const workout = {
       ...newWorkout,
       date: Date.now(),
-      ownerId: this.authService.user$.value.uid,
+      ownerId: user.uid,
     };
-    this.afs.collection<Workout>(collectionName).add(workout);
+    return await this.afs.collection<Workout>(collectionName).add(workout);
   }
 }

@@ -4,6 +4,7 @@ export interface UserProfile {
   memberSince: number;
   ownerId: string;
   preferences: UserPreferences;
+  level?: string;
 }
 
 export interface UserPreferences {

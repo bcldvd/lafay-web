@@ -8,8 +8,12 @@
 
 <ng-container *ngIf="(sessions$ | async) as sessions; else loading">
     <ng-container *ngIf="sessions.length > 0; else empty">
+        (La suite est en cours de développement 😅)
         <ul>
-            <li *ngFor="let session of sessions">{{session.date | date}}</li>
+            <li *ngFor="let session of sessions">
+                {{session.level}}
+                {{session.date | date}}
+            </li>
         </ul>
     </ng-container>
     <ng-template #empty>

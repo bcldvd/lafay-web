@@ -6,16 +6,16 @@ export interface Exercise {
   imageFull?: string;
   reps?: number;
   time?: number;
-  rest: number;
-  sets: number;
+  rest?: number;
+  sets?: number;
   effective?: number[];
   skipEffective?: boolean;
   page?: number;
 }
 
 export interface WorkoutDto {
-  level: number;
-  // exercises: Exercise[];
+  level: string;
+  exercises: Exercise[];
 }
 
 export interface Workout extends WorkoutDto {

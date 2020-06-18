@@ -2,11 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Session, Exercise } from '../workouts.interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { session } from '../warmup/warmup.constants';
-import { EXERCISES_IMAGE_PATH, EXERCISES_META } from 'src/app/app.constants';
 import { SESSION_STATUSES } from './session.constants';
 import { DialogExerciseInfoComponent } from '../session-plan/session-plan.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SessionService } from './session.service';
 
 @Component({
   selector: 'app-session',
@@ -16,7 +16,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class SessionComponent implements OnInit {
   @Input() session: Session;
 
-  @Output() done = new EventEmitter<boolean>();
+  @Output() repsDone = new EventEmitter<Session>();
+  @Output() done = new EventEmitter<Session>();
 
   currentExercise$ = new BehaviorSubject<Exercise>(null);
   currentStatus: SESSION_STATUSES;
@@ -29,17 +30,19 @@ export class SessionComponent implements OnInit {
   cooldownDone = false;
   sessionProgress: number;
 
-  constructor(public dialog: MatDialog, formBuilder: FormBuilder) {
+  constructor(
+    public dialog: MatDialog,
+    formBuilder: FormBuilder,
+    private sessionService: SessionService
+  ) {
     this.formGroup = formBuilder.group({
       reps: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
+    this.session = this.sessionService.mapSession(this.session);
     this.session = this.session.map((exercise) => {
-      exercise.image = `${EXERCISES_IMAGE_PATH}/${exercise.name}.png`;
-      exercise.imageFull = `${EXERCISES_IMAGE_PATH}/${exercise.name}-full.png`;
-      exercise.page = EXERCISES_META[exercise.name].page;
       if (!exercise.skipEffective) {
         exercise.effective = [];
       }
@@ -77,7 +80,7 @@ export class SessionComponent implements OnInit {
     if (this.currentStatus === SESSION_STATUSES.REST) {
       if (this.exercisesNb === this.currentExerciseNb) {
         this.currentStatus = SESSION_STATUSES.DONE;
-        this.done.emit(true);
+        this.done.emit(this.getEffective(this.session));
       } else {
         this.currentExercise$.next(session[this.currentExerciseNb]);
         this.currentStatus = SESSION_STATUSES.EXERCISE;
@@ -89,15 +92,17 @@ export class SessionComponent implements OnInit {
 
   restDone() {
     if (!this.session[this.currentExerciseNb].skipEffective) {
+      const reps = this.formGroup.get('reps').value;
       this.session[this.currentExerciseNb].effective[
         this.currentSet - 1
-      ] = this.formGroup.get('reps').value;
+      ] = reps;
+      this.emitEffective();
     }
     if (this.session[this.currentExerciseNb + 1]) {
       this.nextExercise();
     } else if (!this.session[this.currentExerciseNb + 1]) {
       this.currentStatus = SESSION_STATUSES.DONE;
-      this.done.emit(true);
+      this.done.emit(this.getEffective(this.session));
     }
   }
 
@@ -109,6 +114,17 @@ export class SessionComponent implements OnInit {
     ) {
       this.restDone();
     }
+  }
+
+  emitEffective() {
+    this.repsDone.emit(this.getEffective(this.session));
+  }
+
+  private getEffective(effectiveSession) {
+    return effectiveSession.map(({ name, effective }) => ({
+      name,
+      effective,
+    }));
   }
 
   openDialog(exercise) {

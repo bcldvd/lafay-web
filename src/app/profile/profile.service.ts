@@ -69,4 +69,15 @@ export class ProfileService {
       .doc(this.docId)
       .update(profile);
   }
+
+  updateLevel(level: string) {
+    const profile = {
+      level,
+      lastEdit: Date.now(),
+    };
+    return this.afs
+      .collection<UserProfile>(collectionName)
+      .doc(this.docId)
+      .update(profile);
+  }
 }

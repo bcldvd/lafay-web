@@ -21,4 +21,23 @@
     </div>
 </div>
 
-<app-session *ngIf="currentStep === STEPS.SESSION" [session]="session" (done)="onSessionDone()"></app-session>
+<ng-container *ngIf="currentStep === STEPS.SESSION">
+    <app-session [session]="session" (done)="onSessionDone($event)"></app-session>
+    <div class="cta-button">
+        <button mat-raised-button color="primary" (click)="nextStep()">Quel est mon résultat ? 😅</button>
+    </div>
+</ng-container>
+
+<div class="placement-answer" *ngIf="currentStep === STEPS.DONE">
+    <div class="jumbotron">
+        <img src="/assets/trophy.png" alt="Image d'une coupe" class="trophy">
+        <span class="level">{{newLevel}}</span>
+    </div>
+    <div>
+        <h3 class="mat-display-1 center-text">Vous commencerez par le niveau {{newLevel}} !</h3>
+        <div class="cta-button">
+            <button mat-raised-button color="primary" (click)="acknowledgeNewLevel()">Cool !</button>
+        </div>
+    </div>
+    <img src="/assets/arm.png" alt="Image d'un bras musclé" class="arm">
+</div>

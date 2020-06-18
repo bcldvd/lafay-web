@@ -5,10 +5,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { Session, Exercise } from '../workouts.interfaces';
-import {
-  EXERCISES_IMAGE_PATH,
-  EXERCISES_META,
-} from '../../../app/app.constants';
+import { SessionService } from '../session/session.service';
 
 @Component({
   selector: 'app-session-plan',
@@ -18,9 +15,12 @@ import {
 export class SessionPlanComponent implements OnInit {
   @Input() session: Session;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private sessionService: SessionService
+  ) {}
 
-  openDialog(exercise) {
+  openDialog(exercise: Exercise) {
     this.dialog.open(DialogExerciseInfoComponent, {
       data: exercise,
       maxWidth: '98vw',
@@ -29,12 +29,7 @@ export class SessionPlanComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.session = this.session.map((exercise) => {
-      exercise.image = `${EXERCISES_IMAGE_PATH}/${exercise.name}.png`;
-      exercise.imageFull = `${EXERCISES_IMAGE_PATH}/${exercise.name}-full.png`;
-      exercise.page = EXERCISES_META[exercise.name].page;
-      return exercise;
-    });
+    this.session = this.sessionService.mapSession(this.session);
   }
 }
 
