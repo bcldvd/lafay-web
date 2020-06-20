@@ -5,13 +5,11 @@ import { WarmupRoutingModule } from './warmup-routing.module';
 import { WarmupComponent } from './warmup.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  SessionPlanComponent,
-  DialogExerciseInfoComponent,
-} from '../session-plan/session-plan.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SessionModule } from '../session/session.module';
-import { SessionPlanModule } from '../session-plan/session-plan.module';
+import { SessionModule } from '../cdk/session/session.module';
+import { SessionPlanModule } from '../cdk/session-plan/session-plan.module';
+import { WorkoutModule } from '../cdk/workout/workout.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [WarmupComponent],
@@ -23,6 +21,8 @@ import { SessionPlanModule } from '../session-plan/session-plan.module';
     MatDialogModule,
     SessionModule,
     SessionPlanModule,
+    WorkoutModule,
+    MatCardModule,
   ],
 })
 export class WarmupModule {}

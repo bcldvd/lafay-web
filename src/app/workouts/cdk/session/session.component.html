@@ -1,0 +1,110 @@
+<ng-container *ngIf="(currentExercise$ | async) as exercise">
+
+    <div class="exercise-header">
+        <h2>Exercice : {{exercise.name}}</h2>
+        <div class="exercise-meta">
+            <span>
+                <span class="set-legend">Série</span>
+                <span *ngFor="let set of sets" class="set"
+                    [ngClass]="{'current-set': currentSet === set}">{{set}}</span>
+            </span>
+            <span>{{currentExerciseNb + 1}}/{{exercisesNb}}</span>
+        </div>
+        <mat-progress-bar [value]="sessionProgress">
+        </mat-progress-bar>
+    </div>
+
+    <div class="exercise-visual">
+        <img [src]="exercise.image" alt="Image de l'exercise" class="exercise-image"
+            *ngIf="currentStatus === STATUSES.EXERCISE">
+        <img src="/assets/stopwatch.png" alt="Image d'un timer" *ngIf="currentStatus === STATUSES.REST">
+        <img src="/assets/water.png" alt="Image d'une gourde d'eau"
+            *ngIf="currentStatus === STATUSES.REST && exercise.rest > 45">
+    </div>
+
+    <div class="exercise-cues" *ngIf="currentStatus === STATUSES.EXERCISE">
+        <div class="reps" *ngIf="exercise.reps">
+            <span class="reps-nb mat-display-3">{{exercise.reps}}</span>
+            <span class="reps-legend">Répétitions</span>
+        </div>
+        <div class="time" *ngIf="exercise.time">
+            <app-countdown [time]="exercise.time" (done)="exerciseDone()"></app-countdown>
+        </div>
+
+        <div class="as-much-as-possible" *ngIf="!exercise.reps && !exercise.time">
+            <span class="mat-display-1">Autant que possible !!</span>
+        </div>
+
+        <div class="exercise-actions" *ngIf="currentStatus === STATUSES.EXERCISE">
+            <button mat-button color="accent" (click)="openDialog(exercise)">
+                <mat-icon>info</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" (click)="exerciseDone()">C'est fait !</button>
+        </div>
+    </div>
+
+    <div class="exercise-rest" *ngIf="currentStatus === STATUSES.REST">
+        <app-countdown #cd [time]="exercise.rest" (done)="restTimerDone()" *ngIf="!cooldownDone"></app-countdown>
+
+        <form [formGroup]="formGroup" *ngIf="!exercise.skipEffective">
+            <mat-form-field>
+                <mat-label>Répétitions</mat-label>
+                <input matInput maxlength="3" min="1" required type="number" pattern="[0-9]*" formControlName="reps">
+            </mat-form-field>
+        </form>
+
+        <div class="rest-actions">
+            <button mat-button color="primary" (click)="restDone()" *ngIf="cooldownDone" [disabled]="formGroup.invalid"
+                class="validate-rep">
+                <mat-icon>checkbox</mat-icon>
+            </button>
+            <button mat-raised-button color="accent" (click)="restDone()"
+                *ngIf="!cooldownDone && !exercise.skipEffective" [disabled]="formGroup.invalid">Passer la
+                récupération</button>
+            <button mat-raised-button color="accent" (click)="restDone()"
+                *ngIf="!cooldownDone && exercise.skipEffective">Passer la
+                récupération</button>
+        </div>
+    </div>
+
+    <div class="next-up">
+        <div class="rest" *ngIf="currentStatus === STATUSES.EXERCISE">
+            <span class="legend">Récupération</span>
+            <span>{{exercise.rest}} secondes</span>
+        </div>
+        <div class="next-exercise" *ngIf="currentSet === sets.length && session[currentExerciseNb + 1]">
+            <span class="legend">À suivre</span>
+            <span>{{session[currentExerciseNb + 1].name}}</span>
+            <span class="next-amount" *ngIf="session[currentExerciseNb + 1].time">
+                {{session[currentExerciseNb + 1].time}}
+                secondes
+            </span>
+            <span class="next-amount" *ngIf="session[currentExerciseNb + 1].reps">
+                x{{session[currentExerciseNb + 1].reps}}
+            </span>
+            <span class="next-amount"
+                *ngIf="!session[currentExerciseNb + 1].reps && !session[currentExerciseNb + 1].time">
+                ∞
+            </span>
+        </div>
+        <div class="next-exercise" *ngIf="currentSet < sets.length">
+            <span class="legend">À suivre</span>
+            <span>{{session[currentExerciseNb].name}}</span>
+            <span class="next-amount" *ngIf="session[currentExerciseNb].time">
+                {{session[currentExerciseNb].time}}
+                secondes
+            </span>
+            <span class="next-amount" *ngIf="session[currentExerciseNb].reps">
+                x{{session[currentExerciseNb].reps}}
+            </span>
+            <span class="next-amount" *ngIf="!session[currentExerciseNb].reps && !session[currentExerciseNb].time">
+                ∞
+            </span>
+        </div>
+        <div class="rest" *ngIf="currentStatus === STATUSES.REST && session[currentExerciseNb + 1]">
+            <span class="legend">Récupération</span>
+            <span>{{session[currentExerciseNb + 1].rest}} secondes</span>
+        </div>
+    </div>
+
+</ng-container>

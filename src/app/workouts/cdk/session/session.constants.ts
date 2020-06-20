@@ -1,5 +1,4 @@
 export enum SESSION_STATUSES {
   EXERCISE,
   REST,
-  DONE,
 }

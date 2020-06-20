@@ -1,0 +1,4 @@
+<ng-content select="app-workout-plan" *ngIf="currentStep === STEPS.SESSION_PLAN"></ng-content>
+<ng-content select="app-workout-doing" *ngIf="currentStep === STEPS.SESSION"></ng-content>
+<ng-content select="app-workout-done" *ngIf="currentStep === STEPS.DONE"></ng-content>
+<ng-content select="app-workout-new-level" *ngIf="currentStep === STEPS.NEW_LEVEL"></ng-content>

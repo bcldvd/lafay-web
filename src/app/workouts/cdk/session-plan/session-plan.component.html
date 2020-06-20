@@ -12,9 +12,14 @@
                 <mat-icon>info</mat-icon>
             </button>
         </li>
+        <li *ngIf="exercise.sets > 1" class="exercise-sets">
+            <span>Séries</span>
+            <span>{{exercise.sets}}</span>
+        </li>
         <li *ngIf="exercise.rest" class="exercise-rest">
             <span>Repos</span>
             <span>{{exercise.rest * 1000 | date:'m:ss'}}</span>
         </li>
     </ng-container>
 </ul>
+<div class="gradient-bottom-bg"></div>

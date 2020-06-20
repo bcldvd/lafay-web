@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Session, Exercise } from '../workouts.interfaces';
+import { Session, Exercise } from '../../workouts.interfaces';
 import { BehaviorSubject } from 'rxjs';
-import { session } from '../warmup/warmup.constants';
+import { session } from '../../warmup/warmup.constants';
 import { SESSION_STATUSES } from './session.constants';
 import { DialogExerciseInfoComponent } from '../session-plan/session-plan.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,7 +28,9 @@ export class SessionComponent implements OnInit {
   currentSet: number;
   formGroup: FormGroup;
   cooldownDone = false;
-  sessionProgress: number;
+  sessionProgress = 0;
+  currentExerciseWSets = 0;
+  totalExercisesWSets: number;
 
   constructor(
     public dialog: MatDialog,
@@ -53,7 +55,7 @@ export class SessionComponent implements OnInit {
     this.currentStatus = SESSION_STATUSES.EXERCISE;
     this.exercisesNb = this.session.length;
     this.currentSet = 1;
-    this.sessionProgress = 0;
+    this.totalExercisesWSets = this.calculateTotalExercisesWSets(this.session);
     this.currentExercise$.subscribe((exercise) => {
       this.sets = Array(exercise.sets)
         .fill(0)
@@ -66,20 +68,22 @@ export class SessionComponent implements OnInit {
       this.currentSet++;
     } else {
       this.currentExerciseNb++;
-      this.sessionProgress = (this.currentExerciseNb * 100) / this.exercisesNb;
+      this.currentSet = 1;
       const exercise = this.session[this.currentExerciseNb];
       this.currentExercise$.next(exercise);
     }
 
     this.formGroup.reset();
     this.cooldownDone = false;
+    this.currentExerciseWSets++;
+    this.sessionProgress =
+      (this.currentExerciseWSets * 100) / this.totalExercisesWSets;
     this.currentStatus = SESSION_STATUSES.EXERCISE;
   }
 
   exerciseDone() {
     if (this.currentStatus === SESSION_STATUSES.REST) {
       if (this.exercisesNb === this.currentExerciseNb) {
-        this.currentStatus = SESSION_STATUSES.DONE;
         this.done.emit(this.getEffective(this.session));
       } else {
         this.currentExercise$.next(session[this.currentExerciseNb]);
@@ -98,10 +102,11 @@ export class SessionComponent implements OnInit {
       ] = reps;
       this.emitEffective();
     }
-    if (this.session[this.currentExerciseNb + 1]) {
+    if (this.currentSet < this.sets.length) {
       this.nextExercise();
-    } else if (!this.session[this.currentExerciseNb + 1]) {
-      this.currentStatus = SESSION_STATUSES.DONE;
+    } else if (this.session[this.currentExerciseNb + 1]) {
+      this.nextExercise();
+    } else {
       this.done.emit(this.getEffective(this.session));
     }
   }
@@ -133,5 +138,15 @@ export class SessionComponent implements OnInit {
       maxWidth: '99vw',
       panelClass: 'full-width-dialog',
     });
+  }
+
+  private calculateTotalExercisesWSets(exercises: Session): number {
+    let total = 0;
+
+    exercises.forEach((exercise) => {
+      total += exercise.sets;
+    });
+
+    return total;
   }
 }

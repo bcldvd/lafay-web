@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { version } from '../../../package.json';
+import { menu } from './home.constants';
+import { HomeService } from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -10,42 +12,13 @@ import { version } from '../../../package.json';
 })
 export class HomeComponent implements OnInit {
   version = version;
+  menu = menu;
 
-  menu = [
-    [
-      {
-        name: 'Accueil',
-        icon: 'home',
-        path: '/',
-      },
-      {
-        name: 'Mes dernieres séances',
-        icon: 'update',
-        path: '/last-sessions',
-      },
-      {
-        name: 'Mes statistiques',
-        icon: 'assessment',
-      },
-      {
-        name: 'Ma progression',
-        icon: 'military_tech',
-      },
-    ],
-    [
-      {
-        name: 'Communauté',
-        icon: 'chat',
-      },
-      {
-        name: 'A propos',
-        icon: 'info',
-        path: '/about',
-      },
-    ],
-  ];
-
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(
+    public auth: AuthService,
+    private router: Router,
+    public home: HomeService
+  ) {}
 
   ngOnInit(): void {}
 

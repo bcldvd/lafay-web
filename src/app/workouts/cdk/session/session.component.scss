@@ -5,9 +5,6 @@ $lighter-grey: #f2f3f5;
 :host,
 .working-out {
     height: 100%;
-}
-
-.working-out {
     display: grid;
     grid-template-rows: 1fr 3fr 2fr 1fr;
 }
@@ -130,6 +127,7 @@ h2 {
     grid-gap: 8px;
     align-self: end;
     margin: -5px;
+    margin-bottom: -25px;
 
     .rest,
     .next-exercise {
@@ -144,28 +142,5 @@ h2 {
     .next-amount,
     .legend {
         color: #909394;
-    }
-}
-
-.session-done {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-
-    h2 {
-        display: flex;
-        align-items: center;
-    }
-
-    .medal {
-        position: absolute;
-        right: 12px;
-        top: -5px;
-        width: 64px;
-    }
-
-    app-session-summary {
-        margin: 16px 0;
     }
 }

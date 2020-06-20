@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Workout } from '../workouts/workouts.interfaces';
 import { WorkoutsService } from '../workouts/workouts.service';
+import { HomeService } from '../home/home.service';
 
 @Component({
   selector: 'app-last-sessions',
@@ -11,7 +12,9 @@ import { WorkoutsService } from '../workouts/workouts.service';
 export class LastSessionsComponent implements OnInit {
   sessions$: Observable<Workout[]>;
 
-  constructor(private workoutsService: WorkoutsService) {}
+  constructor(private workoutsService: WorkoutsService, home: HomeService) {
+    home.setTitle('Mes dernières séances');
+  }
 
   ngOnInit(): void {
     this.sessions$ = this.workoutsService.getWorkouts();

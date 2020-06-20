@@ -52,14 +52,22 @@ mat-sidenav {
     }
 }
 
-.logout button {
-    $logout-margin: 5px;
-    width: calc(100% - #{$logout-margin * 2});
-    margin: $logout-margin;
+.logout {
+    padding-bottom: 10px;
+
+    button {
+        $logout-margin: 5px;
+        width: calc(100% - #{$logout-margin * 2});
+        margin: $logout-margin;
+    }
 }
 
 /** Toolbar **/
 $google-avatar-size: 32px;
+
+.home-button {
+    padding-right: 5px;
+}
 
 .user-image {
     border-radius: 50%;
@@ -80,6 +88,6 @@ $toolbar-desktop-height: 64px;
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
     .app-content {
-        height: calc(100vh - #{$toolbar-mobile-height + ($app-content-padding * 2)});
+        height: calc(100vh - #{$toolbar-mobile-height + ($app-content-padding * 2) + 20});
     }
 }

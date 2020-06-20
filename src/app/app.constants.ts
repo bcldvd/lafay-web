@@ -18,14 +18,50 @@ export const EXERCISES_META: ExercisesMeta = {
   A1: {
     page: 139,
   },
+  A2: {
+    page: 140,
+  },
+  A3: {
+    page: 141,
+  },
+  A4: {
+    page: 142,
+  },
+  A5: {
+    page: 142,
+  },
+  A6: {
+    page: 142,
+  },
   B: {
     page: 149,
   },
   C: {
     page: 152,
   },
+  C1: {
+    page: 153,
+  },
+  D: {
+    page: 162,
+  },
+  E: {
+    page: 163,
+  },
   E6: {
     page: 169,
+  },
+  F: {
+    page: 171,
+  },
+  G: {
+    page: 175,
+  },
+  K: {
+    page: 190,
+  },
+  K2: {
+    page: 192,
   },
   'C.a.S': {},
 };

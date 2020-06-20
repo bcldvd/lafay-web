@@ -4,6 +4,7 @@ import { ProfileService } from '../profile/profile.service';
 import { take } from 'rxjs/operators';
 import { UserProfile } from '../profile/profile.interfaces';
 import { Router, ActivatedRoute } from '@angular/router';
+import { placementTestPath } from './placement-test/placement-test.constants';
 
 @Component({
   selector: 'app-workouts',
@@ -31,7 +32,7 @@ export class WorkoutsComponent implements OnInit {
     const navigateTo = this.profile ? 'warmup' : 'setup';
     this.router.navigate([navigateTo], {
       relativeTo: this.route,
-      queryParams: { level: 'placement-test' },
+      queryParams: { level: placementTestPath },
     });
   }
 }

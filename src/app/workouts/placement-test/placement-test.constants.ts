@@ -1,5 +1,8 @@
 import { Session } from '../workouts.interfaces';
 
+export const level = 'Test de placement';
+export const placementTestPath = 'placement-test';
+
 export const session: Session = [
   {
     name: 'A',

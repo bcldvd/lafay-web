@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WorkoutsComponent } from './workouts.component';
+import { placementTestPath } from './placement-test/placement-test.constants';
 
 const routes: Routes = [
   {
@@ -18,7 +19,7 @@ const routes: Routes = [
       import('./warmup/warmup.module').then((m) => m.WarmupModule),
   },
   {
-    path: 'placement-test',
+    path: placementTestPath,
     loadChildren: () =>
       import('./placement-test/placement-test.module').then(
         (m) => m.PlacementTestModule
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: '1a',
     loadChildren: () =>
       import('./level/1a/1a.module').then((m) => m.Level1aModule),
+  },
+  {
+    path: '1b',
+    loadChildren: () =>
+      import('./level/1b/level1b.module').then((m) => m.Level1bModule),
   },
 ];
 

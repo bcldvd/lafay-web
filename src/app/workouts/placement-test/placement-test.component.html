@@ -1,43 +1,43 @@
-<div class="session-plan" *ngIf="currentStep === STEPS.SESSION_PLAN">
-    <h1>
-        <img src="/assets/clipboard.png" alt="Image d'un calepin">
-        Test de placement
-    </h1>
+<app-workout #workout [level]="level" (decideLevel)="decideLevel($event)">
+    <app-workout-plan>
+        <h1>
+            <img src="/assets/clipboard.png" alt="Image d'un calepin">
+            Test de placement
+        </h1>
 
-    <div>
-        <p>Il s'agit pour vous de connaître vos performances réalisées à pleine amplitude sur les exercices suivants :
-        </p>
+        <div>
+            <p>Il s'agit pour vous de connaître vos performances réalisées à pleine amplitude sur les exercices suivants
+                :
+            </p>
 
-        <app-session-plan [session]="session"></app-session-plan>
+            <app-session-plan [session]="session"></app-session-plan>
 
-        <p>Avant de commencer, lisez bien les détails de chaque exercices en appuyant sur le bouton <mat-icon
-                color="accent">
-                info</mat-icon> à coté de chaque exercice
-        </p>
-    </div>
-
-    <div class="cta-button">
-        <button mat-raised-button color="primary" (click)="nextStep()">J'ai bien tout lu, c'est parti</button>
-    </div>
-</div>
-
-<ng-container *ngIf="currentStep === STEPS.SESSION">
-    <app-session [session]="session" (done)="onSessionDone($event)"></app-session>
-    <div class="cta-button">
-        <button mat-raised-button color="primary" (click)="nextStep()">Quel est mon résultat ? 😅</button>
-    </div>
-</ng-container>
-
-<div class="placement-answer" *ngIf="currentStep === STEPS.DONE">
-    <div class="jumbotron">
-        <img src="/assets/trophy.png" alt="Image d'une coupe" class="trophy">
-        <span class="level">{{newLevel}}</span>
-    </div>
-    <div>
-        <h3 class="mat-display-1 center-text">Vous commencerez par le niveau {{newLevel}} !</h3>
-        <div class="cta-button">
-            <button mat-raised-button color="primary" (click)="acknowledgeNewLevel()">Cool !</button>
+            <mat-card>
+                <p>Avant de commencer, lisez bien les détails de chaque exercices en appuyant sur le bouton <mat-icon
+                        color="accent">
+                        info</mat-icon> à coté de chaque exercice
+                </p>
+            </mat-card>
         </div>
-    </div>
-    <img src="/assets/arm.png" alt="Image d'un bras musclé" class="arm">
-</div>
+
+        <div class="cta-button">
+            <button mat-raised-button color="primary" (click)="workout.nextStep()">J'ai bien tout lu, c'est
+                parti</button>
+        </div>
+    </app-workout-plan>
+
+    <app-workout-doing>
+        <app-session [session]="session" (done)="workout.onSessionDone($event)"></app-session>
+    </app-workout-doing>
+
+    <app-workout-done>
+        <app-session-done [session]="session"></app-session-done>
+        <div class="cta-button">
+            <button mat-raised-button color="primary" (click)="workout.nextStep()">Quel est mon résultat ? 😅</button>
+        </div>
+    </app-workout-done>
+
+    <app-workout-new-level>
+        <app-next-level [level]="newLevel"></app-next-level>
+    </app-workout-new-level>
+</app-workout>

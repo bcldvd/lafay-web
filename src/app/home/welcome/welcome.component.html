@@ -8,13 +8,17 @@
 
 <ng-container *ngIf="(sessions$ | async) as sessions; else loading">
     <ng-container *ngIf="sessions.length > 0; else empty">
-        (La suite est en cours de développement 😅)
         <ul>
             <li *ngFor="let session of sessions">
                 {{session.level}}
+                -
                 {{session.date | date}}
             </li>
         </ul>
+
+        <button mat-fab color="primary" (click)="goToTodaySession()" class="fab-cat-button">
+            <mat-icon>add</mat-icon>
+        </button>
     </ng-container>
     <ng-template #empty>
         Vous n'avez pas encore pratiqué la méthode 😅

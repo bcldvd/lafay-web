@@ -1,3 +1,12 @@
+app-workout-plan {
+    display: grid;
+    grid-template-rows: 70vh 1fr 1fr;
+}
+
+.cta-button {
+    align-self: center;
+}
+
 .warmup-warning {
     font-style: italic;
 }

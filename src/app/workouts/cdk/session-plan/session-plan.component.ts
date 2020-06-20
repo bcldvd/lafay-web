@@ -4,7 +4,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Session, Exercise } from '../workouts.interfaces';
+import { Session, Exercise } from '../../workouts.interfaces';
 import { SessionService } from '../session/session.service';
 
 @Component({

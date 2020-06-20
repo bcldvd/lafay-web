@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { session } from './placement-test.constants';
-import { WORKOUTS_STEPS } from '../workouts.constants';
-import { Exercise, Session } from '../workouts.interfaces';
-import { WorkoutsService } from '../workouts.service';
-import { Router } from '@angular/router';
+import { session, level } from './placement-test.constants';
+import { Session } from '../workouts.interfaces';
 import { ProfileService } from 'src/app/profile/profile.service';
+import { HomeService } from 'src/app/home/home.service';
 
 @Component({
   selector: 'app-placement-test',
@@ -13,34 +11,16 @@ import { ProfileService } from 'src/app/profile/profile.service';
 })
 export class PlacementTestComponent implements OnInit {
   session = session;
-  STEPS = WORKOUTS_STEPS;
-  currentStep: WORKOUTS_STEPS;
-  level = 'Test de placement';
+  level = level;
   newLevel: string;
 
-  constructor(
-    private workoutsService: WorkoutsService,
-    private profileService: ProfileService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
+  constructor(private profileService: ProfileService, home: HomeService) {
+    home.setTitle(this.level);
   }
 
-  previousStep() {
-    this.currentStep--;
-  }
+  ngOnInit(): void {}
 
-  nextStep() {
-    this.currentStep++;
-  }
-
-  onSessionDone(effectiveSession: Session) {
-    this.workoutsService.addWorkout({
-      level: this.level,
-      exercises: effectiveSession,
-    });
+  decideLevel(effectiveSession: Session) {
     this.newLevel = this.decideNewLevel(effectiveSession);
     this.profileService.updateLevel(this.newLevel);
   }
@@ -58,9 +38,5 @@ export class PlacementTestComponent implements OnInit {
     }
 
     return newLevel;
-  }
-
-  acknowledgeNewLevel() {
-    this.router.navigate(['/']);
   }
 }

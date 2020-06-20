@@ -29,6 +29,7 @@ export class ProfileService {
           )
           .valueChanges({ idField: 'docId' })
           .pipe(
+            take(1),
             map((profiles) => {
               return this.guestUser || profiles[0];
             })
@@ -60,24 +61,29 @@ export class ProfileService {
   }
 
   updatePreferences(preferences: UserPreferences) {
-    const profile = {
-      preferences,
-      lastEdit: Date.now(),
-    };
-    return this.afs
-      .collection<UserProfile>(collectionName)
-      .doc(this.docId)
-      .update(profile);
+    this.updateProfile({ preferences });
   }
 
   updateLevel(level: string) {
-    const profile = {
-      level,
+    this.updateProfile({ level });
+  }
+
+  private updateProfile(profile: Partial<UserProfile>) {
+    const user = this.authService.user$.value;
+    const newProfile = {
+      ...profile,
       lastEdit: Date.now(),
     };
-    return this.afs
-      .collection<UserProfile>(collectionName)
-      .doc(this.docId)
-      .update(profile);
+    if (user.isAnonymous) {
+      this.guestUser = {
+        ...this.guestUser,
+        ...newProfile,
+      };
+    } else {
+      return this.afs
+        .collection<UserProfile>(collectionName)
+        .doc(this.docId)
+        .update(newProfile);
+    }
   }
 }

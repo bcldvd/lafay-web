@@ -16,13 +16,16 @@ export class WorkoutsService {
     private afs: AngularFirestore
   ) {}
 
-  getWorkouts() {
+  getWorkouts(limit = 10) {
     return this.authService.user$.pipe(
       filter((user) => user != null),
       switchMap((user) => {
         return this.afs
           .collection<Workout>(collectionName, (ref) =>
-            ref.where(ownerIdPropName, '==', user.uid)
+            ref
+              .where(ownerIdPropName, '==', user.uid)
+              .orderBy('date', 'desc')
+              .limit(limit)
           )
           .valueChanges();
       })

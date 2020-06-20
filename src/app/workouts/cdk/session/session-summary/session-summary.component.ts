@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SessionService } from '../session.service';
-import { Session } from '../../workouts.interfaces';
+import { Session } from '../../../workouts.interfaces';
 
 @Component({
   selector: 'app-session-summary',

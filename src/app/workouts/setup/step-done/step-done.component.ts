@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UserPreferences } from '../../../profile/profile.interfaces';
 import { ProfileService } from '../../../profile/profile.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { placementTestPath } from '../../placement-test/placement-test.constants';
 
 @Component({
   selector: 'app-step-done',
@@ -21,6 +22,9 @@ export class StepDoneComponent implements OnInit {
 
   async hot() {
     await this.profileService.createProfile(this.preferences);
-    this.router.navigate(['../../warmup'], { relativeTo: this.route });
+    this.router.navigate(['../../warmup'], {
+      relativeTo: this.route,
+      queryParams: { level: placementTestPath },
+    });
   }
 }

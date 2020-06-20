@@ -27,7 +27,8 @@
             <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <button mat-button [routerLink]="['/']">Méthode Lafay</button>
+            <button mat-button [routerLink]="['/']" class="home-button">Méthode Lafay</button>
+            <span *ngIf="(home.title$ | async) as title" class="mat-caption">/ {{title}}</span>
             <span class="fill-remaining-space"></span>
             <ng-container *ngIf="(auth.user$ | async) as user">
                 <button mat-button *ngIf="!user.isAnonymous" [routerLink]="['/profile']">

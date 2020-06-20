@@ -1,1 +1,55 @@
-<p>l1a works!</p>
+<ng-container *ngIf="(session$ | async) as session; else loading">
+    <app-workout #workout [level]="level" (decideLevel)="decideNewLevel($event)">
+        <app-workout-plan>
+            <app-session-plan [session]="session"></app-session-plan>
+
+            <mat-card class="training-frequency">
+                <h3>
+                    Fréquence d'entrainement
+                    <button mat-raised-button color="primary" (click)="workout.nextStep()">C'est parti</button>
+                </h3>
+                <ul>
+                    <li>
+                        <span>1ère semaine</span>
+                        <span>Tous les jours sauf le week-end</span>
+                    </li>
+                    <li>
+                        <span>2ème semaine</span>
+                        <span>Le lundi, le mercredi et le vendredi</span>
+                    </li>
+                    <li>
+                        <span>3ème semaine</span>
+                        <span>Lundi et vendredi</span>
+                    </li>
+                </ul>
+            </mat-card>
+        </app-workout-plan>
+
+        <app-workout-doing>
+            <app-session [session]="session" (done)="workout.onSessionDone($event)"></app-session>
+        </app-workout-doing>
+
+        <app-workout-done>
+            <app-session-done [session]="session"></app-session-done>
+            <div class="cta-button">
+                <button mat-raised-button color="primary" (click)="onSessionDone()">Top !</button>
+            </div>
+        </app-workout-done>
+
+        <app-workout-new-level>
+            <app-next-level [level]="newLevel" *ngIf="newLevel !== placementTestPath"></app-next-level>
+            <div class="new-placement-test" *ngIf="newLevel === placementTestPath">
+                <h3>Bravo, vous pourrez tenter un nouveau test de placement demain !</h3>
+                <div class="cta-button">
+                    <button mat-raised-button color="primary" routerLink="/">Cool !</button>
+                </div>
+            </div>
+        </app-workout-new-level>
+    </app-workout>
+</ng-container>
+
+<ng-template #loading>
+    <div class="loading">
+        Loading
+    </div>
+</ng-template>
