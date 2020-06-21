@@ -1,0 +1,12 @@
+app-workout-plan {
+    display: grid;
+    grid-template-rows: 70vh 1fr 1fr;
+    height: 100%;
+}
+
+.training-frequency {
+    h3 {
+        display: flex;
+        justify-content: space-between;
+    }
+}

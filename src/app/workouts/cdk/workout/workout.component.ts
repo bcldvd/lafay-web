@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { WORKOUTS_STEPS } from './workout.constants';
 import { Session } from '../../workouts.interfaces';
 import { WorkoutsService } from '../../workouts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workout',
@@ -16,7 +17,10 @@ export class WorkoutComponent implements OnInit {
 
   @Output() decideLevel = new EventEmitter<Session>();
 
-  constructor(private workoutsService: WorkoutsService) {}
+  constructor(
+    private workoutsService: WorkoutsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.currentStep = WORKOUTS_STEPS.SESSION_PLAN;
@@ -37,6 +41,14 @@ export class WorkoutComponent implements OnInit {
     });
     this.decideLevel.emit(effectiveSession);
     this.nextStep();
+  }
+
+  onWorkoutDone(level: string) {
+    if (level) {
+      this.nextStep();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }
 

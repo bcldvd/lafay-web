@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { placementTestPath } from '../../placement-test/placement-test.constants';
 import { WorkoutsService } from '../../workouts.service';
 import { BehaviorSubject } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ProfileService } from 'src/app/profile/profile.service';
 
 @Component({
@@ -16,7 +16,6 @@ import { ProfileService } from 'src/app/profile/profile.service';
   styleUrls: ['./1a.component.scss'],
 })
 export class Level1aComponent implements OnInit {
-  session = session;
   session$ = new BehaviorSubject<Session>(null);
   level = level;
   newLevel: string = null;
