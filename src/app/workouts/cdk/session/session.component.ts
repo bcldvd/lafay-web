@@ -55,6 +55,10 @@ export class SessionComponent implements OnInit {
     this.currentStatus = SESSION_STATUSES.EXERCISE;
     this.exercisesNb = this.session.length;
     this.currentSet = 1;
+    const nextReps = this.session[this.currentExerciseNb].reps;
+    if (nextReps) {
+      this.formGroup.patchValue({ reps: nextReps });
+    }
     this.totalExercisesWSets = this.calculateTotalExercisesWSets(this.session);
     this.currentExercise$.subscribe((exercise) => {
       this.sets = Array(exercise.sets)
@@ -74,6 +78,10 @@ export class SessionComponent implements OnInit {
     }
 
     this.formGroup.reset();
+    const nextReps = this.session[this.currentExerciseNb].reps;
+    if (nextReps) {
+      this.formGroup.patchValue({ reps: nextReps });
+    }
     this.cooldownDone = false;
     this.currentExerciseWSets++;
     this.sessionProgress =

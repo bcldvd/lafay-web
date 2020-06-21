@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EXERCISES_IMAGE_PATH, EXERCISES_META } from 'src/app/app.constants';
+import { Session } from '../../workouts.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { EXERCISES_IMAGE_PATH, EXERCISES_META } from 'src/app/app.constants';
 export class SessionService {
   constructor() {}
 
-  mapSession(session) {
+  mapSession(session: Session) {
     return session.map((exercise) => {
       exercise.image = `${EXERCISES_IMAGE_PATH}/${exercise.name}.png`;
       exercise.imageFull = `${EXERCISES_IMAGE_PATH}/${exercise.name}-full.png`;

@@ -36,17 +36,26 @@ export const EXERCISES_META: ExercisesMeta = {
   B: {
     page: 149,
   },
+  B1: {
+    page: 150,
+  },
   C: {
     page: 152,
   },
   C1: {
     page: 153,
   },
+  C3: {
+    page: 155,
+  },
   D: {
     page: 162,
   },
   E: {
     page: 163,
+  },
+  E1: {
+    page: 164,
   },
   E6: {
     page: 169,
@@ -56,6 +65,9 @@ export const EXERCISES_META: ExercisesMeta = {
   },
   G: {
     page: 175,
+  },
+  H: {
+    page: 176,
   },
   K: {
     page: 190,

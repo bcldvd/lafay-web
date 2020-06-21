@@ -1,9 +1,14 @@
 <ul>
     <ng-container *ngFor="let exercise of session">
         <li>
-            <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
+            <img [src]="exercise.image" [alt]="'Exercice' + exercise.name"
+                [ngClass]="{'flip-vertically': exercise.side === 'right'}">
             <div class="exercise-description">
-                <span class="exercise-name mat-title">{{exercise.name}}</span>
+                <span class="exercise-name mat-title">
+                    {{exercise.name}}
+                    <span *ngIf="exercise.side && exercise.side === 'left'">(G)</span>
+                    <span *ngIf="exercise.side && exercise.side === 'right'">(D)</span>
+                </span>
                 <span *ngIf="exercise.reps">x{{exercise.reps}}</span>
                 <span *ngIf="exercise.time">{{exercise.time}} sec</span>
                 <span *ngIf="!exercise.reps && !exercise.time">∞ </span>
@@ -18,7 +23,7 @@
         </li>
         <li *ngIf="exercise.rest" class="exercise-rest">
             <span>Repos</span>
-            <span>{{exercise.rest * 1000 | date:'m:ss'}}</span>
+            <span>{{(exercise.setRest ? exercise.setRest : exercise.rest) * 1000 | date:'m:ss'}}</span>
         </li>
     </ng-container>
 </ul>

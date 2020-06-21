@@ -1,1 +1,45 @@
-<p>level2 works!</p>
+<ng-container *ngIf="(session$ | async) as session; else loading">
+    <app-workout #workout [level]="level" (decideLevel)="decideNewLevel($event)">
+        <app-workout-plan>
+            <app-session-plan [session]="session"></app-session-plan>
+
+            <mat-card class="training-frequency">
+                <h3>
+                    Fréquence d'entrainement
+                    <button mat-raised-button color="primary" (click)="workout.nextStep()">C'est parti</button>
+                </h3>
+                <ul>
+                    <li>
+                        <span>1ère semaine</span>
+                        <span>Lundi, mardi, jeudi, vendredi</span>
+                    </li>
+                    <li>
+                        <span>Ensuite</span>
+                        <span>Le lundi, le mercredi et le vendredi</span>
+                    </li>
+                </ul>
+            </mat-card>
+        </app-workout-plan>
+
+        <app-workout-doing>
+            <app-session [session]="session" (done)="workout.onSessionDone($event)"></app-session>
+        </app-workout-doing>
+
+        <app-workout-done>
+            <app-session-done [session]="session"></app-session-done>
+            <div class="cta-button">
+                <button mat-raised-button color="primary" (click)="workout.onWorkoutDone(newLevel)">Top !</button>
+            </div>
+        </app-workout-done>
+
+        <app-workout-new-level>
+            <app-next-level [level]="newLevel"></app-next-level>
+        </app-workout-new-level>
+    </app-workout>
+</ng-container>
+
+<ng-template #loading>
+    <div class="loading">
+        Chargement...
+    </div>
+</ng-template>

@@ -6,7 +6,9 @@ export interface Exercise {
   imageFull?: string;
   reps?: number;
   time?: number;
+  side?: 'left' | 'right';
   rest?: number;
+  setRest?: number;
   sets?: number;
   effective?: number[];
   skipEffective?: boolean;

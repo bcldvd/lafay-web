@@ -31,7 +31,9 @@ export class Level1bComponent implements OnInit {
       .pipe(take(1))
       .subscribe((workouts) => {
         workouts = workouts.filter((workout) => workout.level === level);
-        this.session$.next(this.decideSession(workouts));
+        this.session$.next(
+          workouts.length > 0 ? this.decideSession(workouts) : session
+        );
       });
   }
 

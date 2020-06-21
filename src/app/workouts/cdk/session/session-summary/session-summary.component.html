@@ -1,7 +1,12 @@
 <ul>
     <li *ngFor="let exercise of session">
-        <img [src]="exercise.image" [alt]="'Exercice' + exercise.name">
-        <span class="exercise-name mat-title">{{exercise.name}}</span>
+        <img [src]="exercise.image" [alt]="'Exercice' + exercise.name"
+            [ngClass]="{'flip-vertically': exercise.side === 'right'}">
+        <span class="exercise-name mat-title">
+            {{exercise.name}}
+            <span *ngIf="exercise.side && exercise.side === 'left'">(G)</span>
+            <span *ngIf="exercise.side && exercise.side === 'right'">(D)</span>
+        </span>
         <div class="exercise-reps">
             <span *ngFor="let nbRep of exercise.effective">
                 {{nbRep}}

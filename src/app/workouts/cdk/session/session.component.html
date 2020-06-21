@@ -1,7 +1,11 @@
 <ng-container *ngIf="(currentExercise$ | async) as exercise">
 
     <div class="exercise-header">
-        <h2>Exercice : {{exercise.name}}</h2>
+        <h2>
+            Exercice : {{exercise.name}}
+            <span *ngIf="exercise.side && exercise.side === 'left'">(Jambe gauche)</span>
+            <span *ngIf="exercise.side && exercise.side === 'right'">(Jambe droite)</span>
+        </h2>
         <div class="exercise-meta">
             <span>
                 <span class="set-legend">Série</span>
@@ -16,7 +20,7 @@
 
     <div class="exercise-visual">
         <img [src]="exercise.image" alt="Image de l'exercise" class="exercise-image"
-            *ngIf="currentStatus === STATUSES.EXERCISE">
+            *ngIf="currentStatus === STATUSES.EXERCISE" [ngClass]="{'flip-vertically': exercise.side === 'right'}">
         <img src="/assets/stopwatch.png" alt="Image d'un timer" *ngIf="currentStatus === STATUSES.REST">
         <img src="/assets/water.png" alt="Image d'une gourde d'eau"
             *ngIf="currentStatus === STATUSES.REST && exercise.rest > 45">
@@ -44,7 +48,8 @@
     </div>
 
     <div class="exercise-rest" *ngIf="currentStatus === STATUSES.REST">
-        <app-countdown #cd [time]="exercise.rest" (done)="restTimerDone()" *ngIf="!cooldownDone"></app-countdown>
+        <app-countdown #cd [time]="(currentSet === sets.length && exercise.setRest) ? exercise.setRest : exercise.rest"
+            (done)="restTimerDone()" *ngIf="!cooldownDone"></app-countdown>
 
         <form [formGroup]="formGroup" *ngIf="!exercise.skipEffective">
             <mat-form-field>
@@ -70,7 +75,8 @@
     <div class="next-up">
         <div class="rest" *ngIf="currentStatus === STATUSES.EXERCISE">
             <span class="legend">Récupération</span>
-            <span>{{exercise.rest}} secondes</span>
+            <span>{{(currentSet === sets.length && exercise.setRest) ? exercise.setRest : exercise.rest}}
+                secondes</span>
         </div>
         <div class="next-exercise" *ngIf="currentSet === sets.length && session[currentExerciseNb + 1]">
             <span class="legend">À suivre</span>
@@ -101,9 +107,14 @@
                 ∞
             </span>
         </div>
-        <div class="rest" *ngIf="currentStatus === STATUSES.REST && session[currentExerciseNb + 1]">
+        <div class="rest"
+            *ngIf="currentStatus === STATUSES.REST && session[currentExerciseNb + 1] && currentSet !== (sets.length - 1)">
             <span class="legend">Récupération</span>
             <span>{{session[currentExerciseNb + 1].rest}} secondes</span>
+        </div>
+        <div class="rest" *ngIf="currentStatus === STATUSES.REST && currentSet === (sets.length - 1)">
+            <span class="legend">Récupération</span>
+            <span>{{exercise.setRest || exercise.rest}} secondes</span>
         </div>
     </div>
 
