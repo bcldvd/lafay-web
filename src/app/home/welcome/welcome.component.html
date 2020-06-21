@@ -1,5 +1,9 @@
 <ng-container *ngIf="(auth.user$ | async) as user">
     <h2>Bienvenue {{user.isAnonymous ? 'invité' : user.displayName}} !!</h2>
+
+    <ng-container *ngIf="!user.isAnonymous && (profile$ | async) as profile">
+        <h3 *ngIf="profile.level !== PLACEMENT_TEST">Vous etes actuellement au niveau {{profile.level}}</h3>
+    </ng-container>
 </ng-container>
 
 <br>

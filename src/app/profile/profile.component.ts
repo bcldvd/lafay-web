@@ -7,6 +7,7 @@ import { UserProfile } from './profile.interfaces';
 import { filter, take } from 'rxjs/operators';
 import { DEFAULT_PREFERENCES } from './profile.constants';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { placementTestPath } from '../workouts/placement-test/placement-test.constants';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -17,6 +18,7 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class ProfileComponent implements OnInit {
   formGroup: FormGroup;
   profile$: Observable<UserProfile>;
+  PLACEMENT_TEST = placementTestPath;
 
   constructor(
     public auth: AuthService,

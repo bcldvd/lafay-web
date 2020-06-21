@@ -3,17 +3,30 @@
         <div class="user-info">
             <h3>{{user.displayName}} - {{user.email}}</h3>
             <ng-container *ngIf="(profile$ | async) as profile">
-                <h4>Membre depuis le {{profile.memberSince | date:'longDate'}}</h4>
+                <h4>
+                    <span *ngIf="profile.level !== PLACEMENT_TEST">Niveau {{profile.level}}</span>
+                    <span>Membre depuis le {{profile.memberSince | date:'longDate'}}</span>
+                </h4>
             </ng-container>
             <mat-divider></mat-divider>
-            <br>
         </div>
     </ng-container>
 </div>
 
-<form [formGroup]="formGroup" ngNativeValidate>
+<form [formGroup]="formGroup" ngNativeValidate class="preferences">
     <mat-slide-toggle formControlName="jumpingRope" labelPosition="before">
         <img src="/assets/skipping-rope.png" alt="Image de corde à sauter">
         Corde à sauter
     </mat-slide-toggle>
+    <mat-slide-toggle labelPosition="before" disabled>
+        <img src="/assets/pull-up.png" alt="Image d'une barre de traction">
+        Barre de traction
+    </mat-slide-toggle>
 </form>
+
+<mat-divider></mat-divider>
+<br>
+
+<button mat-button color="warn">
+    Supprimer mes informations
+</button>

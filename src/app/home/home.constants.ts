@@ -25,6 +25,10 @@ export const menu = [
       icon: 'chat',
     },
     {
+      name: 'Notes de version',
+      icon: 'fiber_new',
+    },
+    {
       name: 'A propos',
       icon: 'info',
       path: '/about',

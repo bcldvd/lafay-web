@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -15,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatListModule,
     ReactiveFormsModule,
     MatSlideToggleModule,
+    MatButtonModule,
   ],
 })
 export class ProfileModule {}

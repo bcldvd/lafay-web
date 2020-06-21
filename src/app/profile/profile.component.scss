@@ -6,6 +6,21 @@
     }
 }
 
+h4 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.preferences {
+    mat-slide-toggle {
+        margin: 16px 0;
+    }
+
+    img {
+        width: 32px;
+    }
+}
+
 ::ng-deep .mat-list-text {
     flex-direction: row !important;
     align-items: center;
