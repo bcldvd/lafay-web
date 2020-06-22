@@ -89,7 +89,7 @@ export class SessionComponent implements OnInit {
     this.currentStatus = SESSION_STATUSES.EXERCISE;
   }
 
-  exerciseDone() {
+  exerciseDone(playSound = false) {
     if (this.currentStatus === SESSION_STATUSES.REST) {
       if (this.exercisesNb === this.currentExerciseNb) {
         this.done.emit(this.getEffective(this.session));
@@ -99,6 +99,10 @@ export class SessionComponent implements OnInit {
       }
     } else if (this.currentStatus === SESSION_STATUSES.EXERCISE) {
       this.currentStatus = SESSION_STATUSES.REST;
+
+      if (playSound) {
+        this.sessionService.playExerciseDoneAudio();
+      }
     }
   }
 
@@ -127,6 +131,8 @@ export class SessionComponent implements OnInit {
     ) {
       this.restDone();
     }
+
+    this.sessionService.playRestDoneAudio();
   }
 
   emitEffective() {

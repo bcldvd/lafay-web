@@ -32,7 +32,7 @@
             <span class="reps-legend">Répétitions</span>
         </div>
         <div class="time" *ngIf="exercise.time">
-            <app-countdown [time]="exercise.time" (done)="exerciseDone()"></app-countdown>
+            <app-countdown [time]="exercise.time" (done)="exerciseDone(true)"></app-countdown>
         </div>
 
         <div class="as-much-as-possible" *ngIf="!exercise.reps && !exercise.time">
@@ -63,10 +63,10 @@
                 class="validate-rep">
                 <mat-icon>checkbox</mat-icon>
             </button>
-            <button mat-raised-button color="accent" (click)="restDone()"
-                *ngIf="!cooldownDone && !exercise.skipEffective" [disabled]="formGroup.invalid">Passer la
+            <button mat-button color="accent" (click)="restDone()" *ngIf="!cooldownDone && !exercise.skipEffective"
+                [disabled]="formGroup.invalid">Passer la
                 récupération</button>
-            <button mat-raised-button color="accent" (click)="restDone()"
+            <button mat-button color="accent" (click)="restDone()"
                 *ngIf="!cooldownDone && exercise.skipEffective">Passer la
                 récupération</button>
         </div>

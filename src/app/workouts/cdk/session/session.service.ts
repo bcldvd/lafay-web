@@ -18,4 +18,17 @@ export class SessionService {
       return exercise;
     });
   }
+
+  private playSound(soundPath: string) {
+    const audio = new Audio(soundPath);
+    audio.play();
+  }
+
+  playExerciseDoneAudio() {
+    this.playSound('/assets/exercise_done.mp3');
+  }
+
+  playRestDoneAudio() {
+    this.playSound('/assets/rest_done.mp3');
+  }
 }
