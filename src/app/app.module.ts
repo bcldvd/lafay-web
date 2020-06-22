@@ -17,6 +17,7 @@ import { PwaPromptComponent } from './pwa-prompt/pwa-prompt.component';
 import { PwaService } from './pwa.service';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 registerLocaleData(localeFr, 'fr-FR');
 
@@ -32,6 +33,7 @@ registerLocaleData(localeFr, 'fr-FR');
     HttpClientModule,
     MatBottomSheetModule,
     MatButtonModule,
+    MatSnackBarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
