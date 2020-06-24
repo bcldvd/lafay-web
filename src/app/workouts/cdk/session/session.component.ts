@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Session, Exercise } from '../../workouts.interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { session } from '../../warmup/warmup.constants';
@@ -18,6 +26,8 @@ export class SessionComponent implements OnInit {
 
   @Output() repsDone = new EventEmitter<Session>();
   @Output() done = new EventEmitter<Session>();
+
+  @ViewChild('repsInput') repsInput: ElementRef;
 
   currentExercise$ = new BehaviorSubject<Exercise>(null);
   currentStatus: SESSION_STATUSES;
@@ -127,12 +137,16 @@ export class SessionComponent implements OnInit {
     this.cooldownDone = true;
     if (
       this.session[this.currentExerciseNb].skipEffective ||
-      (this.formGroup.valid && this.formGroup.get('reps')['_pendingTouched'])
+      (this.formGroup.valid && !this.inputHasFocus())
     ) {
       this.restDone();
     }
 
     this.sessionService.playRestDoneAudio();
+  }
+
+  private inputHasFocus() {
+    return document.activeElement === this.repsInput.nativeElement;
   }
 
   emitEffective() {

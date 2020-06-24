@@ -54,7 +54,8 @@
         <form [formGroup]="formGroup" *ngIf="!exercise.skipEffective">
             <mat-form-field>
                 <mat-label>Répétitions</mat-label>
-                <input matInput maxlength="3" min="1" required type="number" pattern="[0-9]*" formControlName="reps">
+                <input matInput maxlength="3" min="1" required type="number" pattern="[0-9]*" formControlName="reps"
+                    #repsInput>
             </mat-form-field>
         </form>
 
