@@ -9,4 +9,5 @@ export interface UserProfile {
 
 export interface UserPreferences {
   jumpingRope: boolean;
+  notifications: boolean;
 }

@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UserProfile, UserPreferences } from './profile.interfaces';
 
 const collectionName = 'users';
-const ownerIdPropName = 'ownerId';
+export const ownerIdPropName = 'ownerId';
 
 @Injectable({
   providedIn: 'root',

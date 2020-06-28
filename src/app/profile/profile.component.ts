@@ -3,11 +3,12 @@ import { AuthService } from '../auth/auth.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ProfileService } from './profile.service';
 import { Observable } from 'rxjs';
-import { UserProfile } from './profile.interfaces';
+import { UserProfile, UserPreferences } from './profile.interfaces';
 import { filter, take } from 'rxjs/operators';
 import { DEFAULT_PREFERENCES } from './profile.constants';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { placementTestPath } from '../workouts/placement-test/placement-test.constants';
+import { WebNotificationService } from '../web-notification.service';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -23,7 +24,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public auth: AuthService,
     formBuilder: FormBuilder,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private webNotification: WebNotificationService
   ) {
     this.formGroup = formBuilder.group(DEFAULT_PREFERENCES);
     this.formGroup.disable();
@@ -37,7 +39,13 @@ export class ProfileComponent implements OnInit {
       this.formGroup.enable();
       this.formGroup.patchValue(profile.preferences);
     });
-    this.formGroup.valueChanges.subscribe((preferences) => {
+    this.formGroup.valueChanges.subscribe((preferences: UserPreferences) => {
+      if (
+        !this.webNotification.subscription$.value &&
+        preferences.notifications
+      ) {
+        this.webNotification.subscribe();
+      }
       this.profileService.updatePreferences(preferences);
     });
   }

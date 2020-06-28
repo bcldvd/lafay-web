@@ -17,6 +17,9 @@ export const environment = {
     appId: '1:425841543550:web:73ed73d6dd548fbb7a4b2f',
     measurementId: 'G-LNTJF9S5Z1',
   },
+  VAPIDPublicKey:
+    'BGVvh8Vb4_0OG2-s2mVuTOOufSvsqQRYI8a3PgdIhPQj_3R7EyQ41I2vrNseVgI2VtOzVrRbz90Occzfyq2uuBI',
+  notificationsServer: 'http://localhost:4201/notifications',
 };
 
 /*

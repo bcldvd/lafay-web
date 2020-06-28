@@ -13,4 +13,7 @@ export const environment = {
     appId: '1:526193129845:web:7c2bb785ff011fbee3fb3c',
     measurementId: 'G-HXTR2M48RW',
   },
+  VAPIDPublicKey:
+    'BCdkhHcQbwEUOVfLg8YtcTs6R7N97nTQQLzwZqFRUVjvsOzL-JMuv0-eJuHhcm8Q6RiHkH4p_02KAcII0Ak_CXI',
+  notificationsServer: 'http://localhost:4201/notifications',
 };

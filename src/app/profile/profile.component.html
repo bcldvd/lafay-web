@@ -14,6 +14,7 @@
 </div>
 
 <form [formGroup]="formGroup" ngNativeValidate class="preferences">
+    <p class="mat-caption section-titles">Équippement</p>
     <mat-slide-toggle formControlName="jumpingRope" labelPosition="before">
         <img src="/assets/skipping-rope.png" alt="Image de corde à sauter">
         Corde à sauter
@@ -22,11 +23,18 @@
         <img src="/assets/pull-up.png" alt="Image d'une barre de traction">
         Barre de traction
     </mat-slide-toggle>
+    <mat-divider></mat-divider>
+
+    <p class="mat-caption section-titles">Système</p>
+    <mat-slide-toggle formControlName="notifications" labelPosition="before">
+        <img src="/assets/bell.png" alt="Image d'une notifications">
+        Notifications push
+    </mat-slide-toggle>
 </form>
 
 <mat-divider></mat-divider>
 <br>
 
-<button mat-button color="warn">
+<button mat-button color="warn" disabled>
     Supprimer mes informations
 </button>
