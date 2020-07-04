@@ -27,6 +27,7 @@ export const menu = [
     {
       name: 'Notes de version',
       icon: 'fiber_new',
+      path: '/changelog',
     },
     {
       name: 'A propos',

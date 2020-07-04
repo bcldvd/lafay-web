@@ -37,6 +37,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('../about/about.module').then((m) => m.AboutModule),
       },
+      {
+        path: 'changelog',
+        loadChildren: () =>
+          import('../changelog/changelog.module').then(
+            (m) => m.ChangelogModule
+          ),
+      },
     ],
   },
 ];

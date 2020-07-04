@@ -1,0 +1,19 @@
+<mat-card *ngFor="let update of changelog">
+    <mat-card-header>
+        <mat-card-title>{{update.version}}</mat-card-title>
+        <mat-card-subtitle>{{update.date}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="changes" *ngFor="let change  of update.changes;let i = index; let last = last">
+            <h3 *ngIf="i == 0 || (i > 0 && update.changes[i - 1].category !== change.category)">{{change.category}}</h3>
+            <div class="change-content">
+                <span class="type"
+                    [ngClass]="{'bug': change.type === 'Correction de Bug', 'feature': change.type === 'Nouveau'}">{{change.type}}</span>
+                <span class="description">{{change.description}}</span>
+            </div>
+            <span class="margin-bottom"
+                *ngIf="i < (update.changes.length - 1) && update.changes[i + 1].category !== change.category"></span>
+        </div>
+    </mat-card-content>
+</mat-card>
