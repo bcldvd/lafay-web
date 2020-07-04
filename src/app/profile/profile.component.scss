@@ -1,20 +1,19 @@
-.avatar {
-    img {
-        border-radius: 50%;
-        border: 1px solid;
-        width: 200px;
-    }
-}
+$grey: #9e9e9e;
 
-h4 {
-    display: flex;
-    justify-content: space-between;
+.user-info {
+    text-align: center;
+
+    .member-since {
+        display: block;
+        color: $grey;
+        margin-bottom: 16px;
+    }
 }
 
 .section-titles {
     text-transform: uppercase;
     font-weight: bold;
-    color: #9e9e9e;
+    color: $grey;
     margin-bottom: 0;
 }
 

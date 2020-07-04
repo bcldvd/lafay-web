@@ -1,12 +1,12 @@
 <div class="avatar">
     <ng-container *ngIf="(auth.user$ | async) as user">
         <div class="user-info">
-            <h3>{{user.displayName}} - {{user.email}}</h3>
+            <h1>{{user.displayName}}</h1>
             <ng-container *ngIf="(profile$ | async) as profile">
-                <h4>
-                    <span *ngIf="profile.level !== PLACEMENT_TEST">Niveau {{profile.level}}</span>
-                    <span>Membre depuis le {{profile.memberSince | date:'longDate'}}</span>
-                </h4>
+                <button mat-button *ngIf="profile.level !== PLACEMENT_TEST" color="primary"
+                    (click)="openDialog()">Niveau
+                    {{newLevel || profile.level}}</button>
+                <span class="member-since mat-caption">Membre depuis le {{profile.memberSince | date:'longDate'}}</span>
             </ng-container>
             <mat-divider></mat-divider>
         </div>

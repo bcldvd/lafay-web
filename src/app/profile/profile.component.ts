@@ -9,6 +9,8 @@ import { DEFAULT_PREFERENCES } from './profile.constants';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { placementTestPath } from '../workouts/placement-test/placement-test.constants';
 import { WebNotificationService } from '../web-notification.service';
+import { HomeService } from '../home/home.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @UntilDestroy({ checkProperties: true })
 @Component({
@@ -20,15 +22,19 @@ export class ProfileComponent implements OnInit {
   formGroup: FormGroup;
   profile$: Observable<UserProfile>;
   PLACEMENT_TEST = placementTestPath;
+  newLevel: string;
 
   constructor(
     public auth: AuthService,
     formBuilder: FormBuilder,
     private profileService: ProfileService,
-    private webNotification: WebNotificationService
+    private webNotification: WebNotificationService,
+    home: HomeService,
+    public dialog: MatDialog
   ) {
     this.formGroup = formBuilder.group(DEFAULT_PREFERENCES);
     this.formGroup.disable();
+    home.setTitle('Profil');
   }
 
   ngOnInit(): void {
@@ -49,4 +55,48 @@ export class ProfileComponent implements OnInit {
       this.profileService.updatePreferences(preferences);
     });
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogLevelChangeComponent, {});
+
+    dialogRef.afterClosed().subscribe((newLevel) => {
+      if (newLevel) {
+        this.profileService.updateLevel(newLevel);
+        this.newLevel = newLevel;
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-dialog-level-change',
+  templateUrl: 'dialog-level-change.html',
+})
+export class DialogLevelChangeComponent {
+  selectedValue: string;
+
+  levels = [
+    {
+      value: placementTestPath,
+      viewValue: 'Test de placement',
+    },
+    {
+      value: '1a',
+      viewValue: 'Niveau 1a',
+    },
+    {
+      value: '1b',
+      viewValue: 'Niveau 1b',
+    },
+    {
+      value: '2',
+      viewValue: 'Niveau 2',
+    },
+    {
+      value: '3',
+      viewValue: 'Niveau 3',
+    },
+  ];
+
+  constructor(public dialogRef: MatDialogRef<DialogLevelChangeComponent>) {}
 }

@@ -2,14 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
-import { ProfileComponent } from './profile.component';
+import {
+  ProfileComponent,
+  DialogLevelChangeComponent,
+} from './profile.component';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+
+const components = [ProfileComponent, DialogLevelChangeComponent];
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [...components],
   imports: [
     CommonModule,
     ProfileRoutingModule,
@@ -17,6 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
   ],
 })
 export class ProfileModule {}

@@ -1,0 +1,23 @@
+<mat-dialog-content>
+    <h2>Attention !!</h2>
+    <p>Il est vivement conseillé de se laisser guider par l'application et ne pas changer de niveau
+        manuellement.</p>
+    <p>Faites ceci seulement si vous êtes un pratiquant chevronné</p>
+    <br>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Choix du niveau</mat-label>
+            <mat-select [(ngModel)]="selectedValue">
+                <mat-option *ngFor="let level of levels" [value]="level.value">
+                    {{level.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="selectedValue" color="warn" [disabled]="!selectedValue">Changer
+        de niveau</button>
+    <button mat-raised-button [mat-dialog-close]="false" cdkFocusInitial>Annuler</button>
+</mat-dialog-actions>

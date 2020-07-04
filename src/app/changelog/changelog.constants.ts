@@ -20,6 +20,11 @@ export const changelog: Changelog[] = [
         description: `Ajout d'une page "Note  de version" qui récapitule les changements et nouveautés !`,
         type: 'Nouveau',
       },
+      {
+        category: 'Profil',
+        description: `Possibilité de changer de niveau depuis le profil pour les membres avancés, ou ceux qui acvaient déjà commencé la méthode en dehors de l'application 💪🏼`,
+        type: 'Nouveau',
+      },
     ],
   },
   {
