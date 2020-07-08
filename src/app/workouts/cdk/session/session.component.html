@@ -21,9 +21,10 @@
     <div class="exercise-visual">
         <img [src]="exercise.image" alt="Image de l'exercise" class="exercise-image"
             *ngIf="currentStatus === STATUSES.EXERCISE" [ngClass]="{'flip-vertically': exercise.side === 'right'}">
-        <img src="/assets/stopwatch.png" alt="Image d'un timer" *ngIf="currentStatus === STATUSES.REST">
-        <img src="/assets/water.png" alt="Image d'une gourde d'eau"
-            *ngIf="currentStatus === STATUSES.REST && exercise.rest > 45">
+        <span class="rest-images" *ngIf="currentStatus === STATUSES.REST">
+            <img src="/assets/stopwatch.png" alt="Image d'un timer">
+            <img src="/assets/water.png" alt="Image d'une gourde d'eau" *ngIf="exercise.rest > 45">
+        </span>
     </div>
 
     <div class="exercise-cues" *ngIf="currentStatus === STATUSES.EXERCISE">
@@ -43,7 +44,8 @@
             <button mat-button color="accent" (click)="openDialog(exercise)">
                 <mat-icon>info</mat-icon>
             </button>
-            <button mat-raised-button color="primary" (click)="exerciseDone()">C'est fait !</button>
+            <button mat-raised-button color="primary" (click)="exerciseDone()" class="reps-done-btn">C'est fait
+                !</button>
         </div>
     </div>
 

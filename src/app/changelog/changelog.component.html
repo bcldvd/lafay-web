@@ -9,7 +9,7 @@
             <h3 *ngIf="i == 0 || (i > 0 && update.changes[i - 1].category !== change.category)">{{change.category}}</h3>
             <div class="change-content">
                 <span class="type"
-                    [ngClass]="{'bug': change.type === 'Correction de Bug', 'feature': change.type === 'Nouveau'}">{{change.type}}</span>
+                    [ngClass]="{'bug': change.type === 'Correction de Bug', 'feature': change.type === 'Nouveau', 'enhancement': change.type === 'Amélioration'}">{{change.type}}</span>
                 <span class="description">{{change.description}}</span>
             </div>
             <span class="margin-bottom"

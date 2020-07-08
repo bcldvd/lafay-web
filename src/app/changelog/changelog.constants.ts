@@ -7,10 +7,21 @@ export interface Changelog {
 export interface Change {
   category: string;
   description: string;
-  type: 'Nouveau' | 'Correction de Bug';
+  type: 'Nouveau' | 'Correction de Bug' | 'Amélioration';
 }
 
 export const changelog: Changelog[] = [
+  {
+    date: '8 Juillet 2020',
+    version: '0.4.1',
+    changes: [
+      {
+        category: 'Exercices',
+        description: `La taille des boutons, des répétitions et du timer ont été augmentées pour faciliter les séances 💪🏼`,
+        type: 'Amélioration',
+      },
+    ],
+  },
   {
     date: '4 Juillet 2020',
     version: '0.4.0',
