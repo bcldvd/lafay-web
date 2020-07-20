@@ -1,0 +1,28 @@
+mat-card {
+    margin-bottom: 16px;
+}
+
+mat-card-subtitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-content {
+    display: flex;
+    justify-content: space-around;
+
+    .exercise {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        img {
+            max-width: 40px;
+            flex: 1 1 auto;
+        }
+
+        .nbReps {
+            margin: 0;
+        }
+    }
+}

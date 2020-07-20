@@ -27,7 +27,7 @@ export class WelcomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.sessions$ = this.workoutsService.getWorkouts();
+    this.sessions$ = this.workoutsService.getWorkouts(3);
     this.profile
       .getProfile()
       .pipe(take(1))

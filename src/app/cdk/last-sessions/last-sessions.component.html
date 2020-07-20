@@ -1,0 +1,24 @@
+<ng-container *ngIf="workouts && workouts.length > 0; else empty">
+    <mat-card *ngFor="let session of workouts | slice:0:limit">
+        <mat-card-subtitle>
+            <span><b>{{session.level}}</b></span>
+            <span>{{session.date | date}}</span>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <div *ngFor="let exercise of session.exercises" class="exercise">
+                <span class="nbReps mat-title">{{exercise.effective[0]}}</span>
+                <img [src]="exercise.image" alt="">
+                <span>{{exercise.name}}</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</ng-container>
+
+<ng-template #empty>
+    Vous n'avez pas encore pratiqué la méthode 😅
+    <br>
+    <br>
+    <div class="cta-button">
+        <button mat-raised-button color="primary" [routerLink]="['/level']">C'est parti !!</button>
+    </div>
+</ng-template>

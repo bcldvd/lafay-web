@@ -12,6 +12,17 @@ export interface Change {
 
 export const changelog: Changelog[] = [
   {
+    date: '20 Juillet 2020',
+    version: '0.5.0',
+    changes: [
+      {
+        category: 'Dernières séances',
+        description: `Les dernières séances s'affichent maintenant avec les répétitions effectuées sur chaque exercice. Depuis la page d'accueil, seulement 3 sont affichées, avec un lien vers la page "Mes dernières séances", qui comprend toutes les séances !`,
+        type: 'Nouveau',
+      },
+    ],
+  },
+  {
     date: '8 Juillet 2020',
     version: '0.4.1',
     changes: [

@@ -6,6 +6,7 @@ import { WelcomeComponent } from './welcome.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { LastSessionsComponentsModule } from 'src/app/cdk/last-sessions/last-sessions.module';
 
 @NgModule({
   declarations: [WelcomeComponent],
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDividerModule,
     MatButtonModule,
     MatIconModule,
+    LastSessionsComponentsModule,
   ],
 })
 export class WelcomeModule {}

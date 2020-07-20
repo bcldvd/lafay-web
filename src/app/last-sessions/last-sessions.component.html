@@ -1,14 +1,5 @@
-<h2>Vos dernieres séances</h2>
-
-<ng-container *ngIf="(sessions$ | async) as sessions; else loading">
-    <ng-container *ngIf="sessions.length > 0; else empty">
-        <ul>
-            <li *ngFor="let session of sessions">{{session.date | date}}</li>
-        </ul>
-    </ng-container>
-    <ng-template #empty>
-        Vous n'avez pas encore pratiqué la méthode 😅
-    </ng-template>
+<ng-container *ngIf="(workouts$ | async) as workouts; else loading">
+    <app-last-sessions [workouts]="workouts"></app-last-sessions>
 </ng-container>
 
 <ng-template #loading>

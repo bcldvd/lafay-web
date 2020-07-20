@@ -10,28 +10,17 @@
 
 <h2>Vos dernieres séances</h2>
 
-<ng-container *ngIf="(sessions$ | async) as sessions; else loading">
-    <ng-container *ngIf="sessions.length > 0; else empty">
-        <ul>
-            <li *ngFor="let session of sessions">
-                {{session.level}}
-                -
-                {{session.date | date}}
-            </li>
-        </ul>
+<ng-container *ngIf="(sessions$ | async) as workouts; else loading">
+    <app-last-sessions [workouts]="workouts"></app-last-sessions>
 
+    <ng-container *ngIf="workouts.length > 0">
         <button mat-fab color="primary" (click)="goToTodaySession()" class="fab-cat-button">
             <mat-icon>add</mat-icon>
         </button>
+        <button mat-button color="primary" [routerLink]="['/last-sessions']">
+            Voir toutes les séances
+        </button>
     </ng-container>
-    <ng-template #empty>
-        Vous n'avez pas encore pratiqué la méthode 😅
-        <br>
-        <br>
-        <div class="cta-button">
-            <button mat-raised-button color="primary" [routerLink]="['/level']">C'est parti !!</button>
-        </div>
-    </ng-template>
 </ng-container>
 
 <ng-template #loading>

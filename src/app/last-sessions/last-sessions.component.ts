@@ -5,18 +5,18 @@ import { WorkoutsService } from '../workouts/workouts.service';
 import { HomeService } from '../home/home.service';
 
 @Component({
-  selector: 'app-last-sessions',
+  selector: 'app-last-sessions-feature',
   templateUrl: './last-sessions.component.html',
   styleUrls: ['./last-sessions.component.scss'],
 })
 export class LastSessionsComponent implements OnInit {
-  sessions$: Observable<Workout[]>;
+  workouts$: Observable<Workout[]>;
 
   constructor(private workoutsService: WorkoutsService, home: HomeService) {
     home.setTitle('Mes dernières séances');
   }
 
   ngOnInit(): void {
-    this.sessions$ = this.workoutsService.getWorkouts();
+    this.workouts$ = this.workoutsService.getWorkouts();
   }
 }
