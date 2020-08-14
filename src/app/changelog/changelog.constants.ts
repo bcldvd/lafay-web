@@ -20,6 +20,11 @@ export const changelog: Changelog[] = [
         description: `Ajout de boutons "-1" et "+1" pour rapidement ajuster le nombre de répétitions effectuées après chaque exercices 👌🏼`,
         type: 'Nouveau',
       },
+      {
+        category: 'Résumé de la séance',
+        description: `À partir du niveau 2, l'objectif général est affiché à la place de la fréquence d'entrainement`,
+        type: 'Amélioration',
+      },
     ],
   },
   {
