@@ -54,11 +54,18 @@
             (done)="restTimerDone()" *ngIf="!cooldownDone"></app-countdown>
 
         <form [formGroup]="formGroup" *ngIf="!exercise.skipEffective">
+            <button mat-fab color="primary" aria-label="Add one less rep" (click)="decrementReps()"
+                [disabled]="formGroup.get('reps').value === 0">
+                <mat-icon>exposure_neg_1</mat-icon>
+            </button>
             <mat-form-field>
                 <mat-label>Répétitions</mat-label>
                 <input matInput maxlength="3" min="1" required type="number" pattern="[0-9]*" formControlName="reps"
                     #repsInput>
             </mat-form-field>
+            <button mat-fab color="primary" aria-label="Add one less rep" (click)="incrementReps()">
+                <mat-icon>exposure_plus_1</mat-icon>
+            </button>
         </form>
 
         <div class="rest-actions">

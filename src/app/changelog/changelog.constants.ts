@@ -12,6 +12,17 @@ export interface Change {
 
 export const changelog: Changelog[] = [
   {
+    date: '14 Aout 2020',
+    version: '0.6.0',
+    changes: [
+      {
+        category: 'Exercices',
+        description: `Ajout de boutons "-1" et "+1" pour rapidement ajuster le nombre de répétitions effectuées après chaque exercices 👌🏼`,
+        type: 'Nouveau',
+      },
+    ],
+  },
+  {
     date: '20 Juillet 2020',
     version: '0.5.0',
     changes: [

@@ -177,4 +177,18 @@ export class SessionComponent implements OnInit {
 
     return total;
   }
+
+  decrementReps() {
+    let reps = this.formGroup.get('reps').value;
+    reps--;
+    if (reps >= 0) {
+      this.formGroup.patchValue({ reps });
+    }
+  }
+
+  incrementReps() {
+    let reps = this.formGroup.get('reps').value;
+    reps++;
+    this.formGroup.patchValue({ reps });
+  }
 }
