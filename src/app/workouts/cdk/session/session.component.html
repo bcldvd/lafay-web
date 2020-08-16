@@ -20,7 +20,7 @@
 
     <div class="exercise-visual">
         <img [src]="exercise.image" alt="Image de l'exercise" class="exercise-image"
-            *ngIf="currentStatus === STATUSES.EXERCISE" [ngClass]="{'flip-vertically': exercise.side === 'right'}">
+            *ngIf="currentStatus === STATUSES.EXERCISE" [ngClass]="{'flip-vertically': exercise.side === 'left'}">
         <span class="rest-images" *ngIf="currentStatus === STATUSES.REST">
             <img src="/assets/stopwatch.png" alt="Image d'un timer">
             <img src="/assets/water.png" alt="Image d'une gourde d'eau" *ngIf="exercise.rest > 45">

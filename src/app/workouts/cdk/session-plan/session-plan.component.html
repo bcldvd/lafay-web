@@ -2,7 +2,7 @@
     <ng-container *ngFor="let exercise of session">
         <li>
             <img [src]="exercise.image" [alt]="'Exercice' + exercise.name"
-                [ngClass]="{'flip-vertically': exercise.side === 'right'}">
+                [ngClass]="{'flip-vertically': exercise.side === 'left'}">
             <div class="exercise-description">
                 <span class="exercise-name mat-title">
                     {{exercise.name}}

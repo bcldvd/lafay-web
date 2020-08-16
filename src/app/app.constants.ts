@@ -63,6 +63,9 @@ export const EXERCISES_META: ExercisesMeta = {
   E1: {
     page: 164,
   },
+  E2: {
+    page: 165,
+  },
   E3: {
     page: 166,
   },

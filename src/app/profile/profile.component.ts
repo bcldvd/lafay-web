@@ -96,6 +96,10 @@ export class DialogLevelChangeComponent {
       value: '3',
       viewValue: 'Niveau 3',
     },
+    {
+      value: '4',
+      viewValue: 'Niveau 4',
+    },
   ];
 
   constructor(public dialogRef: MatDialogRef<DialogLevelChangeComponent>) {}

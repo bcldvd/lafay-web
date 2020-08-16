@@ -1,0 +1,33 @@
+<ng-container *ngIf="(session$ | async) as session; else loading">
+    <app-workout #workout [level]="level" (decideLevel)="decideNewLevel($event)">
+        <app-workout-plan>
+            <app-session-plan [session]="session"></app-session-plan>
+
+            <app-training-objective (go)="workout.nextStep()">
+                Essayez d'ajouter à chaque entrainement, une répétition à chaque série de chaque exercice, jusqu'a
+                atteindre <b>8 répétitions</b> sur sur chaque exercice (à part pour G, H, et K2)
+            </app-training-objective>
+        </app-workout-plan>
+
+        <app-workout-doing>
+            <app-session [session]="session" (done)="workout.onSessionDone($event)"></app-session>
+        </app-workout-doing>
+
+        <app-workout-done>
+            <app-session-done [session]="session"></app-session-done>
+            <div class="cta-button">
+                <button mat-raised-button color="primary" (click)="workout.onWorkoutDone(newLevel)">Top !</button>
+            </div>
+        </app-workout-done>
+
+        <app-workout-new-level>
+            <app-next-level [level]="newLevel"></app-next-level>
+        </app-workout-new-level>
+    </app-workout>
+</ng-container>
+
+<ng-template #loading>
+    <div class="loading">
+        Chargement...
+    </div>
+</ng-template>

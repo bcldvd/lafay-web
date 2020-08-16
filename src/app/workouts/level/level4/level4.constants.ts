@@ -1,51 +1,52 @@
 import { Session } from '../../workouts.interfaces';
 
-export const level = '2';
+export const level = '4';
 
 const REST_REPS = 25;
+const REST_2_MIN = 120;
 const REST_3_MIN = 180;
 
 export const session: Session = [
   {
-    name: 'B1',
+    name: 'B',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
+    reps: 3,
   },
   {
     name: 'A3',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
+    reps: 3,
   },
   {
     name: 'A2',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
+    reps: 3,
     setRest: REST_3_MIN,
   },
   {
-    name: 'C1',
+    name: 'C3',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
+    reps: 3,
     setRest: REST_3_MIN,
   },
   {
-    name: 'E',
+    name: 'E2',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
-    setRest: REST_3_MIN,
+    reps: 3,
+    setRest: REST_2_MIN,
     side: 'right',
   },
   {
-    name: 'E',
+    name: 'E2',
     rest: REST_REPS,
     sets: 6,
-    reps: 5,
-    setRest: REST_3_MIN,
+    reps: 3,
+    setRest: REST_2_MIN,
     side: 'left',
   },
   {
@@ -59,14 +60,12 @@ export const session: Session = [
     name: 'G',
     rest: REST_REPS,
     sets: 6,
-    reps: 10,
     setRest: 90,
   },
   {
     name: 'H',
     rest: REST_REPS,
     sets: 6,
-    reps: 1,
     setRest: 60,
   },
   {
