@@ -20,6 +20,12 @@ body {
     }
 }
 
+app-workout-plan {
+    display: grid;
+    grid-template-rows: 70vh 1fr 1fr;
+    height: 100%;
+}
+
 /**  Globals helper classes */
 
 .cta-button {

@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { Level2RoutingModule } from './level2-routing.module';
-import { Level2Component } from './level2.component';
+import { Level3Component } from './level3.component';
 import { WorkoutModule } from '../../cdk/workout/workout.module';
 import { SessionModule } from '../../cdk/session/session.module';
 import { SessionPlanModule } from '../../cdk/session-plan/session-plan.module';
 import { SessionDoneModule } from '../../cdk/session-done/session-done.module';
 import { NextLevelModule } from '../../cdk/next-level/next-level.module';
+import { Level3RoutingModule } from './level3-routing.module';
 import { TrainingObjectiveModule } from '../../cdk/training-objective/training-objective.module';
 
 @NgModule({
-  declarations: [Level2Component],
+  declarations: [Level3Component],
   imports: [
     CommonModule,
-    Level2RoutingModule,
+    Level3RoutingModule,
     WorkoutModule,
     SessionModule,
     TrainingObjectiveModule,
@@ -23,4 +22,4 @@ import { TrainingObjectiveModule } from '../../cdk/training-objective/training-o
     NextLevelModule,
   ],
 })
-export class Level2Module {}
+export class Level3Module {}

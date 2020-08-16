@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { filter, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Workout, WorkoutDto } from './workouts.interfaces';
+import { Workout, WorkoutDto, Exercise, Session } from './workouts.interfaces';
 
 const collectionName = 'workouts';
 const ownerIdPropName = 'ownerId';
@@ -44,5 +44,38 @@ export class WorkoutsService {
       ownerId: user.uid,
     };
     return await this.afs.collection<Workout>(collectionName).add(workout);
+  }
+
+  getLowestAverageRep(exercise: Exercise) {
+    let lowestAverageRep;
+    exercise.effective.forEach((rep, idx) => {
+      if (idx === 0) {
+        lowestAverageRep = rep;
+      } else if (rep < lowestAverageRep) {
+        lowestAverageRep = rep;
+      }
+    });
+    return lowestAverageRep;
+  }
+
+  setSessionFromPreviousLevel(
+    baseSession: Session,
+    previousLevelWorkouts: Workout[],
+    exercisesToChange: string[]
+  ) {
+    const lastLevelWorkout = previousLevelWorkouts[0];
+    const newBaseSession = [...baseSession];
+
+    newBaseSession.forEach((exercise, index) => {
+      if (exercisesToChange.includes(exercise.name)) {
+        const lastLevelExercise = lastLevelWorkout.exercises.find(
+          (lastWorkoutExercise) => lastWorkoutExercise.name === exercise.name
+        );
+        let lowestAverageRep = this.getLowestAverageRep(lastLevelExercise);
+        newBaseSession[index].reps = lowestAverageRep++;
+      }
+    });
+
+    return newBaseSession;
   }
 }
