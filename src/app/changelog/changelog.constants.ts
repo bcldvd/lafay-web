@@ -12,6 +12,17 @@ export interface Change {
 
 export const changelog: Changelog[] = [
   {
+    date: '16 Aout 2020',
+    version: '0.7.0',
+    changes: [
+      {
+        category: 'Niveaux',
+        description: `Ajout des niveaux 3, 4 et 5 !`,
+        type: 'Nouveau',
+      },
+    ],
+  },
+  {
     date: '14 Aout 2020',
     version: '0.6.0',
     changes: [
