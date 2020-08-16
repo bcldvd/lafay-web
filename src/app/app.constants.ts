@@ -87,5 +87,8 @@ export const EXERCISES_META: ExercisesMeta = {
   K2: {
     page: 192,
   },
+  Z: {
+    page: 213,
+  },
   'C.a.S': {},
 };
