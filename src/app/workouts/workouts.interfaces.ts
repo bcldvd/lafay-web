@@ -23,4 +23,5 @@ export interface WorkoutDto {
 export interface Workout extends WorkoutDto {
   date: number;
   ownerId: string;
+  id?: string;
 }

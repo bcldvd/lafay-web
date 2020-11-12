@@ -1,5 +1,5 @@
 <ng-container *ngIf="(workouts$ | async) as workouts; else loading">
-    <app-last-sessions [workouts]="workouts"></app-last-sessions>
+    <app-last-sessions [workouts]="workouts" showMenu="true"></app-last-sessions>
 </ng-container>
 
 <ng-template #loading>

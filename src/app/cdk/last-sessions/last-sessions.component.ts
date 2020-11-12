@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Workout } from 'src/app/workouts/workouts.interfaces';
 import { SessionService } from 'src/app/workouts/cdk/session/session.service';
+import { WorkoutsService } from 'src/app/workouts/workouts.service';
 
 @Component({
   selector: 'app-last-sessions',
@@ -16,8 +17,12 @@ import { SessionService } from 'src/app/workouts/cdk/session/session.service';
 export class LastSessionsComponent implements OnInit, OnChanges {
   @Input() workouts: Workout[];
   @Input() limit: number;
+  @Input() showMenu = false;
 
-  constructor(private sessionService: SessionService) {}
+  constructor(
+    private sessionService: SessionService,
+    private workoutsService: WorkoutsService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -28,5 +33,9 @@ export class LastSessionsComponent implements OnInit, OnChanges {
         return workout;
       });
     }
+  }
+
+  delete(workoutId: string) {
+    return this.workoutsService.deleteWorkout(workoutId);
   }
 }

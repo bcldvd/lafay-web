@@ -12,6 +12,22 @@ export interface Change {
 
 export const changelog: Changelog[] = [
   {
+    date: '12 Novembre 2020',
+    version: '0.8.0',
+    changes: [
+      {
+        category: 'Général',
+        description: `Votre application marche désormais sans connexion internet ! Vous pouvez donc aller faire du sport en exterieur avec le mode avion 🤩. Une fois de retour chez vous ou le réseau activé, la séance se sauvegardera !`,
+        type: 'Nouveau',
+      },
+      {
+        category: 'Dernières séances',
+        description: `Vous pouvez maintenant supprimer une séance passée.`,
+        type: 'Amélioration',
+      },
+    ],
+  },
+  {
     date: '16 Aout 2020',
     version: '0.7.0',
     changes: [

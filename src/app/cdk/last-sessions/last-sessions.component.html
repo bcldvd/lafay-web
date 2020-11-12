@@ -2,7 +2,13 @@
     <mat-card *ngFor="let session of workouts | slice:0:limit">
         <mat-card-subtitle>
             <span><b>{{session.level}}</b></span>
-            <span>{{session.date | date}}</span>
+            <div>
+                <span>{{session.date | date}}</span>
+                <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="session" *ngIf="showMenu"
+                    aria-label="Menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
         </mat-card-subtitle>
         <mat-card-content>
             <div *ngFor="let exercise of session.exercises" class="exercise">
@@ -12,6 +18,17 @@
             </div>
         </mat-card-content>
     </mat-card>
+
+
+    <mat-menu #menu>
+        <ng-template matMenuContent let-id="id">
+            <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span (click)="delete(id)">Supprimer la séance</span>
+            </button>
+        </ng-template>
+    </mat-menu>
+
 </ng-container>
 
 <ng-template #empty>

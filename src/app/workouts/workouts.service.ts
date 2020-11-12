@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Workout, WorkoutDto, Exercise, Session } from './workouts.interfaces';
+import { Observable } from 'rxjs';
 
 const collectionName = 'workouts';
 const ownerIdPropName = 'ownerId';
@@ -16,7 +17,7 @@ export class WorkoutsService {
     private afs: AngularFirestore
   ) {}
 
-  getWorkouts(limit = 10) {
+  getWorkouts(limit = 10): Observable<Workout[]> {
     return this.authService.user$.pipe(
       filter((user) => user != null),
       switchMap((user) => {
@@ -27,7 +28,16 @@ export class WorkoutsService {
               .orderBy('date', 'desc')
               .limit(limit)
           )
-          .valueChanges();
+          .snapshotChanges()
+          .pipe(
+            map((actions) =>
+              actions.map((a) => {
+                const data = a.payload.doc.data() as Workout;
+                const id = a.payload.doc.id;
+                return { id, ...data };
+              })
+            )
+          );
       })
     );
   }
@@ -44,6 +54,18 @@ export class WorkoutsService {
       ownerId: user.uid,
     };
     return await this.afs.collection<Workout>(collectionName).add(workout);
+  }
+
+  async deleteWorkout(workoutId: string) {
+    const user = this.authService.user$.value;
+    if (user.isAnonymous) {
+      return;
+    }
+
+    return await this.afs
+      .collection<Workout>(collectionName)
+      .doc(workoutId)
+      .delete();
   }
 
   getLowestAverageRep(exercise: Exercise) {
