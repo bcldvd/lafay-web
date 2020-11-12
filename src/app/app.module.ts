@@ -28,6 +28,7 @@ registerLocaleData(localeFr, 'fr-FR');
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFirestoreModule,
     HttpClientModule,
