@@ -38,14 +38,14 @@ export const session: Session = [
     rest: REST_REPS,
     sets: 6,
     reps: 8,
-    setRest: REST_2_MIN,
+    setRest: REST_3_MIN,
     side: 'left',
   },
   {
     name: 'F',
     rest: REST_REPS,
     sets: 4,
-    setRest: REST_3_MIN,
+    setRest: REST_2_MIN,
   },
   {
     name: 'G',

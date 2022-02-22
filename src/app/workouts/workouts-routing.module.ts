@@ -55,6 +55,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./level/level5/level5.module').then((m) => m.Level5Module),
   },
+  {
+    path: '6',
+    loadChildren: () =>
+      import('./level/level6/level6.module').then((m) => m.Level6Module),
+  },
 ];
 
 @NgModule({

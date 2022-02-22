@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Session, Workout } from '../../workouts.interfaces';
+import { BehaviorSubject, zip } from 'rxjs';
+import { level, session } from './level6.constants';
 import { HomeService } from 'src/app/home/home.service';
 import { WorkoutsService } from '../../workouts.service';
 import { ProfileService } from 'src/app/profile/profile.service';
 import { take } from 'rxjs/operators';
-import { level, session } from './level4.constants';
+import { Workout, Session } from '../../workouts.interfaces';
 
 @Component({
-  selector: 'app-level4',
-  templateUrl: './level4.component.html',
-  styleUrls: ['./level4.component.scss'],
+  selector: 'app-level6',
+  templateUrl: './level6.component.html',
+  styleUrls: ['./level6.component.scss'],
 })
-export class Level4Component implements OnInit {
+export class Level6Component implements OnInit {
   session$ = new BehaviorSubject<Session>(null);
   level = level;
   newLevel: string;
@@ -27,18 +27,27 @@ export class Level4Component implements OnInit {
 
   ngOnInit(): void {
     this.workouts
-      .getWorkouts(30)
+      .getWorkoutsForLevel(level)
       .pipe(take(1))
       .subscribe((workouts) => {
-        const previousLevelWorkouts = workouts.filter(
-          (workout) => workout.level === '3'
-        );
-        workouts = workouts.filter((workout) => workout.level === level);
-        this.session$.next(
-          workouts.length > 0
-            ? this.decideSession(workouts)
-            : this.setSessionFromPreviousLevel(session, previousLevelWorkouts)
-        );
+        if (workouts.length > 0) {
+          this.session$.next(this.decideSession(workouts));
+        } else {
+          zip(
+            this.workouts.getWorkoutsForLevel('4'),
+            this.workouts.getWorkoutsForLevel('5')
+          )
+            .pipe(take(1))
+            .subscribe(([level4workouts, level5workouts]) => {
+              this.session$.next(
+                this.setSessionFromPreviousLevel(
+                  session,
+                  level4workouts,
+                  level5workouts
+                )
+              );
+            });
+        }
       });
   }
 
@@ -71,19 +80,36 @@ export class Level4Component implements OnInit {
 
   private setSessionFromPreviousLevel(
     baseSession: Session,
-    previousLevelWorkouts: Workout[]
+    level4workouts: Workout[],
+    level5workouts: Workout[]
   ) {
     const newBaseSession = this.workouts.setSessionFromPreviousLevel(
       baseSession,
-      previousLevelWorkouts,
-      ['G', 'H']
+      level5workouts,
+      ['E2', 'F', 'G', 'H', 'K2']
     );
 
     const exerciseA =
-      previousLevelWorkouts.length > 0
-        ? previousLevelWorkouts[0].exercises[1].name
-        : 'A3';
+      level4workouts.length > 0 ? level4workouts[0].exercises[1].name : 'A3';
     newBaseSession[1].name = exerciseA;
+
+    const exerciseBeffective = level5workouts[0].exercises[0].effective[0];
+    if (exerciseBeffective < 20) {
+      newBaseSession[0].reps = 5;
+    } else if (exerciseBeffective < 25) {
+      newBaseSession[0].reps = 7;
+    } else if (exerciseBeffective >= 25) {
+      newBaseSession[0].reps = 8;
+    }
+
+    const exerciseA2effective = level5workouts[0].exercises[2].effective[0];
+    if (exerciseA2effective < 20) {
+      newBaseSession[2].reps = 5;
+    } else if (exerciseA2effective < 25) {
+      newBaseSession[2].reps = 7;
+    } else if (exerciseA2effective >= 25) {
+      newBaseSession[2].reps = 8;
+    }
 
     return newBaseSession;
   }
@@ -91,20 +117,23 @@ export class Level4Component implements OnInit {
   decideNewLevel(effectiveSession: Session) {
     const evaluatedExercises = effectiveSession.filter(
       (exercise) =>
-        exercise.name !== 'G' && exercise.name !== 'H' && exercise.name !== 'K2'
+        exercise.name === 'B1' ||
+        exercise.name === 'A2' ||
+        exercise.name === 'I' ||
+        exercise.name === 'C1'
     );
 
-    let lessThan8 = false;
+    let lessThan10 = false;
     evaluatedExercises.forEach((exercise) => {
       exercise.effective.forEach((rep) => {
-        if (rep < 8) {
-          lessThan8 = true;
+        if (rep <= 10) {
+          lessThan10 = true;
         }
       });
     });
 
-    if (!lessThan8) {
-      this.newLevel = '5';
+    if (!lessThan10) {
+      this.newLevel = '7';
       this.profileService.updateLevel(this.newLevel);
     }
   }

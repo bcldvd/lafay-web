@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 
 const collectionName = 'workouts';
 const ownerIdPropName = 'ownerId';
+const levelPropName = 'level';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,32 @@ export class WorkoutsService {
           .collection<Workout>(collectionName, (ref) =>
             ref
               .where(ownerIdPropName, '==', user.uid)
+              .orderBy('date', 'desc')
+              .limit(limit)
+          )
+          .snapshotChanges()
+          .pipe(
+            map((actions) =>
+              actions.map((a) => {
+                const data = a.payload.doc.data() as Workout;
+                const id = a.payload.doc.id;
+                return { id, ...data };
+              })
+            )
+          );
+      })
+    );
+  }
+
+  getWorkoutsForLevel(level: string, limit = 10): Observable<Workout[]> {
+    return this.authService.user$.pipe(
+      filter((user) => user != null),
+      switchMap((user) => {
+        return this.afs
+          .collection<Workout>(collectionName, (ref) =>
+            ref
+              .where(ownerIdPropName, '==', user.uid)
+              .where(levelPropName, '==', level)
               .orderBy('date', 'desc')
               .limit(limit)
           )
